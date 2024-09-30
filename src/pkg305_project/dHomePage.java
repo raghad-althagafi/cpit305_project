@@ -39,19 +39,18 @@ public class dHomePage {
         events.setBounds(250, 20, 200, 100);
         
         //create the events
-
         JPanel E1 = createStyledPanel(name, EventName, EventStart, 150, true);// If true, it means that the user of this account is the one who wrote the event information
 
-        // JPanel line = lines(302);
+        JPanel line = lines(302);
         JPanel E2 = createStyledPanel("shahad", EventName, EventStart, 305, false);
-        //JPanel line2 = lines(457);
+        JPanel line2 = lines(457);
 
         JPanel E3 = createStyledPanel("shahad", EventName, EventStart, 460, false);
-        //JPanel line3 = lines(612);
+        JPanel line3 = lines(612);
 
         JPanel E4 = createStyledPanel(name, EventName, EventStart, 615, true);
-        //JPanel line4 = lines(765);
-        
+        JPanel line4 = lines(765);
+
         
         //create the left panel
         JPanel panel = new JPanel();
@@ -73,14 +72,14 @@ public class dHomePage {
         panel2.add(events);
         panel2.add(E1);
 
-        //  panel2.add(line);
+        panel2.add(line);
         panel2.add(E2);
-        // panel2.add(line2);
+        panel2.add(line2);
         panel2.add(E3);
-        //panel2.add(line3);
+        panel2.add(line3);
         panel2.add(E4);
-        // panel2.add(line4);
-        
+        panel2.add(line4);
+
 
         
         //add the components to the left panel
@@ -193,6 +192,15 @@ public class dHomePage {
 
         return E1;
 
+    }
+    
+    
+    public static JPanel lines(int y){
+        JPanel line = new JPanel();
+        line.setBackground(Color.BLACK);
+        line.setBounds(0,y,700,1);
+        line.setLayout(null);
+        return line;
     }
  
     
