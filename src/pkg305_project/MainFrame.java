@@ -27,13 +27,13 @@ public class MainFrame {
     public MainFrame() {
         
         //create frame
-        JFrame main = new Frame("Main");
+        JFrame frame = new Frame("Main");
         //create panel
         JPanel panel = new JPanel();
         //set the background color
         panel.setBackground(Color.DARK_GRAY);
         //add panel to frame
-        main.add(panel);
+        frame.add(panel);
         //set layout
         panel.setLayout(null);
         
@@ -50,14 +50,18 @@ public class MainFrame {
         
         //start button
         JButton start = new JButton("Start now");
-        //set font of button 
-        start.setFont(fontText);
+        //set color and font button
+        start = button(start);
         start.setBounds(290, 590, 350, 40);
-        //set background color of button
-        start.setBackground(Darkgreen);
-        //set the text color
-        start.setForeground(Color.WHITE);
         panel.add(start);
+        
+        
+        //exit button
+        JButton exit = new JButton("Exit");
+        exit.setBounds(290, 650, 350, 40);
+        //set color and font button
+        exit = button(exit);
+        panel.add(exit);
         
         
         //clicking start button
@@ -70,7 +74,29 @@ public class MainFrame {
         });
         
         
+        //clicking exit button
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+            }
+        });
+        
+        
     }
+    
+    
+    //method to set color and font of buttons
+    public JButton button(JButton button){
+        //set font of  button
+        button.setFont(fontText);
+        //set color of button text
+        button.setForeground(Color.WHITE);
+        //set background color of button
+        button.setBackground(Darkgreen);
+        //return button
+        return button;
+        }
     
     
 }

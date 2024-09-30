@@ -28,7 +28,7 @@ public class Login {
 
     public Login() {
         //create frame
-        JFrame main = new Frame("Login");
+        JFrame frame = new Frame("Login");
         
         
         //create panel
@@ -36,7 +36,7 @@ public class Login {
         //set background color
         panel.setBackground(Color.DARK_GRAY);
         //add panel to frame
-        main.add(panel);
+        frame.add(panel);
         //set panel layout to null
         panel.setLayout(null);
         
@@ -102,12 +102,29 @@ public class Login {
         panel.add(registerButton);
         
         
+        //exit button
+        JButton exit = new JButton("Exit");
+        exit.setBounds(40, 30, 100, 40);
+        //set color and font button
+        exit = button(exit);
+        panel.add(exit);
+        
+        
         //clicking register button
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //open register frame
                 Register r = new Register();
+            }
+        });
+        
+        
+        //clicking exit button
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
             }
         });
         

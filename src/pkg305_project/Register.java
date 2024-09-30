@@ -28,13 +28,13 @@ public class Register {
     public Register() {
         
         //create frame
-        JFrame main = new Frame("Register");
+        JFrame frame = new Frame("Register");
         //create panel
         JPanel panel = new JPanel();
         //set background colot to gray
         panel.setBackground(Color.DARK_GRAY);
         //add panel to frame
-        main.add(panel);
+        frame.add(panel);
         //set layout to null
         panel.setLayout(null);
         
@@ -131,11 +131,29 @@ public class Register {
         panel.add(login);
         
         
+        //exit button
+        JButton exit = new JButton("Exit");
+        exit.setBounds(40, 30, 100, 40);
+        //set color and font button
+        exit = button(exit);
+        panel.add(exit);
+        
+        
         //clicking Login button
         login.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Login r = new Login();
+            }
+        });
+        
+        
+        //clicking exit button
+        exit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                frame.dispose();
             }
         });
         
