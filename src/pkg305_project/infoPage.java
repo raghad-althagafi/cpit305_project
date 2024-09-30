@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -93,17 +94,28 @@ public class infoPage {
         //buttons
         JButton Cbutton = new JButton("Confirm");
         JButton Bbutton = new JButton("Back");
+        JButton logButton = new JButton("Log out");
+        JButton DelButton = new JButton("Delete the account");
+        
         Cbutton.setBackground(new Color(5, 125, 114));
         Cbutton.setForeground(Color.WHITE);
         Bbutton.setBackground(new Color(5, 125, 114));
         Bbutton.setForeground(Color.WHITE);
+        logButton.setBackground(new Color(5, 125, 114));
+        logButton.setForeground(Color.WHITE);
+        DelButton.setBackground(Color.RED);
+        DelButton.setForeground(Color.WHITE);
         
         //button's positions
-        Cbutton.setBounds(235, 450, 500, 50); 
-        Bbutton.setBounds(235, 515, 500, 50); 
+        Cbutton.setBounds(235, 460, 500, 50); 
+        logButton.setBounds(235, 525, 500, 50); 
+        DelButton.setBounds(260, 720, 450, 50); 
+        Bbutton.setBounds(235, 590, 500, 50);        
         
         f.add(Cbutton);
         f.add(Bbutton);
+        f.add(logButton);
+        f.add(DelButton);
         
         //set font
         userName.setFont(newFont);
@@ -111,7 +123,9 @@ public class infoPage {
         userPassword.setFont(newFont);
         Cbutton.setFont(newFont2);
         Bbutton.setFont(newFont2);
-        
+        logButton.setFont(newFont2);
+        DelButton.setFont(newFont2);
+
         //Feedback after the user change information
         Cbutton.addActionListener(new ActionListener() {   
             @Override
@@ -122,16 +136,51 @@ public class infoPage {
     
          });
         
+         //Delete the account 
+        DelButton.addActionListener(new ActionListener() {   
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int response = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete this account?","Quesiton", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+            // Check if the user clicked "Yes"
+                if (response == JOptionPane.YES_OPTION) {
+                    // If Yes show the main page
+                     MainFrame mainFrame = new MainFrame();
+
+                    //close the current frame
+                    ((JFrame) SwingUtilities.getWindowAncestor(logButton)).dispose();
+                }
+            }
+
+    
+         });
+        
+        //log out
+        logButton.addActionListener(new ActionListener() {   
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to log out?", "Question", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+                // Check if the user clicked "Yes"
+                if (response == JOptionPane.YES_OPTION) {
+                    // If Yes show the main page
+                     MainFrame mainFrame = new MainFrame();
+
+                    //close the current frame
+                    ((JFrame) SwingUtilities.getWindowAncestor(logButton)).dispose();
+                }
+            }
+        });
 //        //back to home page
-//         Bbutton.addActionListener(new ActionListener() {   
+//        Bbutton.addActionListener(new ActionListener() {   
 //            @Override
 //            public void actionPerformed(ActionEvent e) {
 //                dHomePage dp = new dHomePage(user);
 //                dp.showPage();
 //            }
-
-    
+//
+//    
 //         });
-    }
 
+ 
+}
 }
