@@ -105,6 +105,9 @@ public class dHomePage {
             @Override
             public void actionPerformed(ActionEvent e) {
             //شاشه اضافه الفعاليه هنا
+             ADDevent frameCreator = new ADDevent();
+             JFrame frame = frameCreator.createFrame("Add Event");
+             frame.setVisible(true);
             }
         });
         
@@ -179,11 +182,28 @@ public class dHomePage {
             E1.add(delete);
             
              delete.addActionListener(new ActionListener() {
+                 
             @Override
             public void actionPerformed(ActionEvent e) {
                //اذا انحذفت الفعاليه
-               
-               
+               String[] options = {"Delete", "No"};
+        int choice = JOptionPane.showOptionDialog(
+            null, 
+            "Are you sure?", 
+            "Confirmation", 
+            JOptionPane.DEFAULT_OPTION, 
+            JOptionPane.WARNING_MESSAGE, 
+            null, 
+            options, 
+            options[1]
+        );
+        
+        if (choice == 0) {
+           // System.out.println("Item deleted");
+        } else {
+          //  System.out.println("Deletion canceled");
+        }
+        
             }
         });
             

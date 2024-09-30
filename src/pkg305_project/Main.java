@@ -5,6 +5,8 @@
  */
 package pkg305_project;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author AHC
@@ -17,7 +19,6 @@ public class Main {
     public static void main(String[] args) {
         //create main frame
         MainFrame mainFrame = new MainFrame();
-        
          User user = new User("Raghad", 0, "r20zxc");
          infoPage ipage = new infoPage(user);
          ipage.showPage();
