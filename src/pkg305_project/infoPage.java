@@ -170,16 +170,18 @@ public class infoPage {
                 }
             }
         });
-//        //back to home page
-//        Bbutton.addActionListener(new ActionListener() {   
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                dHomePage dp = new dHomePage(user);
-//                dp.showPage();
-//            }
-//
-//    
-//         });
+        //back to home page
+        Bbutton.addActionListener(new ActionListener() {   
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dHomePage dp = new dHomePage(user);
+                dp.showPage();
+                 //close the current frame
+                    ((JFrame) SwingUtilities.getWindowAncestor(logButton)).dispose();
+            }
+
+    
+         });
 
  
 }
