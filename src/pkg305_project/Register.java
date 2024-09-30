@@ -23,7 +23,6 @@ import javax.swing.JTextField;
 public class Register {
     public static final Font fontText = new Font("Serif",Font.BOLD, 25);
     public static final Font fontTitle = new Font("Serif",Font.BOLD, 40);
-    public static final Color Darkgreen = new Color(5,125,114);
 
     public Register() {
         
@@ -32,7 +31,7 @@ public class Register {
         //create panel
         JPanel panel = new JPanel();
         //set background colot to gray
-        panel.setBackground(Color.DARK_GRAY);
+        panel.setBackground(ColorsFonts.lightPurple);
         //add panel to frame
         frame.add(panel);
         //set layout to null
@@ -44,7 +43,7 @@ public class Register {
         //set font of Register label
         register.setFont(fontTitle);
         //set color of Register label
-        register.setForeground(Color.WHITE); 
+        register.setForeground(ColorsFonts.darkPurple); 
         register.setBounds(400, 90, 200, 80);
         //add label to panel
         panel.add(register);
@@ -167,7 +166,7 @@ public class Register {
         //set color of button text
         button.setForeground(Color.WHITE);
         //set background color of button
-        button.setBackground(Darkgreen);
+        button.setBackground(ColorsFonts.darkPurple);
         //return button
         return button;
         }
@@ -178,7 +177,7 @@ public class Register {
         //set font of label
         label.setFont(fontText);
         //set color of label
-        label.setForeground(Color.WHITE); 
+        label.setForeground(ColorsFonts.darkPurple); 
         return label;
     }
     

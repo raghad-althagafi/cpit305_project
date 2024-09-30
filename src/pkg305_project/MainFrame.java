@@ -20,10 +20,7 @@ import javax.swing.JPanel;
  */
 public class MainFrame {
     
-       public static final Font fontText = new Font("Serif",Font.BOLD, 25);
-       public static final Font fontTitle = new Font("Serif",Font.BOLD, 40);
-       public static final Color Darkgreen = new Color(5,125,114);
-
+       
     public MainFrame() {
         
         //create frame
@@ -31,7 +28,7 @@ public class MainFrame {
         //create panel
         JPanel panel = new JPanel();
         //set the background color
-        panel.setBackground(Color.DARK_GRAY);
+        panel.setBackground(ColorsFonts.lightPurple);
         //add panel to frame
         frame.add(panel);
         //set layout
@@ -41,10 +38,10 @@ public class MainFrame {
         //hello label
         JLabel helloLabel = new JLabel("KAU Events");
         //set color of label
-        helloLabel.setForeground(Color.WHITE); 
+        helloLabel.setForeground(ColorsFonts.darkPurple); 
         //set font of label
-        helloLabel.setFont(fontTitle);
-        helloLabel.setBounds(360, 350, 600, 200);
+        helloLabel.setFont(ColorsFonts.fontTitle);
+        helloLabel.setBounds(360, 300, 600, 200);
         panel.add(helloLabel);
         
         
@@ -89,11 +86,11 @@ public class MainFrame {
     //method to set color and font of buttons
     public JButton button(JButton button){
         //set font of  button
-        button.setFont(fontText);
+        button.setFont(ColorsFonts.fontText);
         //set color of button text
-        button.setForeground(Color.WHITE);
+        button.setForeground(Color.white);
         //set background color of button
-        button.setBackground(Darkgreen);
+        button.setBackground(ColorsFonts.darkPurple);
         //return button
         return button;
         }

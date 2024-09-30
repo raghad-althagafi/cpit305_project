@@ -24,7 +24,6 @@ public class Login {
     
     public static final Font fontText = new Font("Serif",Font.BOLD, 25);
     public static final Font fontTitle = new Font("Serif",Font.BOLD, 40);
-    public static final Color Darkgreen = new Color(5,125,114);
 
     public Login() {
         //create frame
@@ -34,7 +33,7 @@ public class Login {
         //create panel
         JPanel panel = new JPanel();
         //set background color
-        panel.setBackground(Color.DARK_GRAY);
+        panel.setBackground(ColorsFonts.lightPurple);
         //add panel to frame
         frame.add(panel);
         //set panel layout to null
@@ -45,7 +44,7 @@ public class Login {
         JLabel Login = new JLabel("Login");
         Login.setBounds(370, 115, 200, 80);
         //set color of label
-        Login.setForeground(Color.WHITE);
+        Login.setForeground(ColorsFonts.darkPurple);
         //set font of label
         Login.setFont(fontTitle);
         //add it to the panel
@@ -120,11 +119,22 @@ public class Login {
         });
         
         
+        
+        
         //clicking exit button
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
+            }
+        });
+        
+        
+        //clicking login button
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new StudentInterface();
             }
         });
         
@@ -138,7 +148,7 @@ public class Login {
         //set color of button text
         button.setForeground(Color.WHITE);
         //set background color of button
-        button.setBackground(Darkgreen);
+        button.setBackground(ColorsFonts.darkPurple);
         //return button
         return button;
         }
@@ -149,7 +159,7 @@ public class Login {
         //set font of label
         label.setFont(fontText);
         //set color of label
-        label.setForeground(Color.WHITE); 
+        label.setForeground(ColorsFonts.darkPurple); 
         return label;
     }
     
