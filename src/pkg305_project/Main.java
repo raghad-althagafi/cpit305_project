@@ -22,6 +22,7 @@ public class Main {
          User user = new User("Raghad", 0, "r20zxc");
          infoPage ipage = new infoPage(user);
          ipage.showPage();
+         //new StudentInterface();
     }
     
 }
