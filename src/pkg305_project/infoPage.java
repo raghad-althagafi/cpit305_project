@@ -45,30 +45,17 @@ public class infoPage {
         
         //create frame and change its color
         Frame f = new Frame("Profile");
-        f.getContentPane().setBackground(Color.darkGray);
+        f.getContentPane().setBackground(ColorsFonts.lightPurple);
         f.setLayout(null);
         
-        //create font
-        Font newFont = new Font("Serif", Font.BOLD, 40);
-        Font newFont2 = new Font("Serif", Font.BOLD, 30);
         
-                    // Load the image
-//            ImageIcon imageIcon = new ImageIcon("user-png-33846.png");
-//
-//            JLabel imageLabel = new JLabel(imageIcon);
-//            f.add(imageLabel);
 
         //labels
-        JLabel userName = new JLabel("Username");
-        userName.setForeground(Color.WHITE);
+        JLabel userName = labelStyle("Username"); 
         f.add(userName);
-
-        JLabel userEmail = new JLabel("Email");
-        userEmail.setForeground(Color.WHITE);
+        JLabel userEmail = labelStyle("Email");             
         f.add(userEmail);
-
-        JLabel userPassword = new JLabel("Password");
-        userPassword.setForeground(Color.WHITE);
+        JLabel userPassword =labelStyle("Password");              
         f.add(userPassword);
         
         //label's positions
@@ -92,20 +79,14 @@ public class infoPage {
         PasswordTF.setBounds(450, 360, 220, 40);
         
         //buttons
-        JButton Cbutton = new JButton("Confirm");
-        JButton Bbutton = new JButton("Back");
-        JButton logButton = new JButton("Log out");
+        JButton Cbutton = buttonStyle("Confirm");
+        JButton Bbutton = buttonStyle("Back");
+        JButton logButton = buttonStyle("Log out");
         JButton DelButton = new JButton("Delete the account");
-        
-        Cbutton.setBackground(new Color(5, 125, 114));
-        Cbutton.setForeground(Color.WHITE);
-        Bbutton.setBackground(new Color(5, 125, 114));
-        Bbutton.setForeground(Color.WHITE);
-        logButton.setBackground(new Color(5, 125, 114));
-        logButton.setForeground(Color.WHITE);
         DelButton.setBackground(Color.RED);
         DelButton.setForeground(Color.WHITE);
-        
+        DelButton.setFont(ColorsFonts.fontButton);
+
         //button's positions
         Cbutton.setBounds(235, 460, 500, 50); 
         logButton.setBounds(235, 525, 500, 50); 
@@ -117,14 +98,8 @@ public class infoPage {
         f.add(logButton);
         f.add(DelButton);
         
-        //set font
-        userName.setFont(newFont);
-        userEmail.setFont(newFont);
-        userPassword.setFont(newFont);
-        Cbutton.setFont(newFont2);
-        Bbutton.setFont(newFont2);
-        logButton.setFont(newFont2);
-        DelButton.setFont(newFont2);
+
+        
 
         //Feedback after the user change information
         Cbutton.addActionListener(new ActionListener() {   
@@ -174,8 +149,6 @@ public class infoPage {
         Bbutton.addActionListener(new ActionListener() {   
             @Override
             public void actionPerformed(ActionEvent e) {
-                dHomePage dp = new dHomePage(user);
-                dp.showPage();
                  //close the current frame
                     ((JFrame) SwingUtilities.getWindowAncestor(logButton)).dispose();
             }
@@ -185,4 +158,25 @@ public class infoPage {
 
  
 }
+  
+    
+//mathod to set font and color for buttons
+    public JButton buttonStyle(String s) {
+        JButton b = new JButton(s);
+        b.setBackground(ColorsFonts.darkPurple);
+        b.setForeground(Color.WHITE);
+        b.setFont(ColorsFonts.fontButton);
+
+        return b;
+    }
+
+
+//mathod to set font and color for labels
+    public JLabel labelStyle(String s){
+       JLabel l = new JLabel(s);
+        l.setForeground(ColorsFonts.darkPurple);
+        l.setFont(ColorsFonts.fontText);
+       
+        return l;
+    }
 }
