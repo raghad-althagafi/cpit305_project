@@ -17,7 +17,7 @@ public class Details {
         JFrame details = new JFrame("Details");
         details.setSize(700, 450); // Set size of the frame
         details.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close application on exit
-        details.setBackground(Color.darkGray); // Set background color (not effective on JFrame)
+        details.setBackground(ColorsFonts.lightPurple); // Set background color (not effective on JFrame)
 
         // Create a 'Back' button
         JButton back = createStyledButton("Back");
@@ -37,7 +37,7 @@ public class Details {
         events.setVerticalAlignment(JLabel.TOP); // Align label to the top
         events.setHorizontalAlignment(JLabel.CENTER); // Center align text
         events.setFont(new Font("Comic Sans", Font.BOLD, 25)); // Set font style and size
-        events.setForeground(Color.WHITE); // Set text color
+        events.setForeground(ColorsFonts.darkPurple); // Set text color
         events.setBounds(70, 100, 200, 100); // Set position and size of the label
 
         // Create a label for event details (time)
@@ -47,7 +47,7 @@ public class Details {
         details1.setVerticalAlignment(JLabel.CENTER);
         details1.setHorizontalAlignment(JLabel.LEFT);
         details1.setFont(new Font("Comic Sans", Font.PLAIN, 20));
-        details1.setForeground(Color.WHITE);
+        details1.setForeground(ColorsFonts.darkPurple);
         details1.setBounds(100, 130, 700, 50); // Set position and size
 
         // Create a JTextPane for additional text
@@ -59,12 +59,13 @@ public class Details {
                 "You can customize this text however you like.\n\n" +
                 "End of text.");
         textArea.setFont(new Font("Comic Sans", Font.PLAIN, 20)); // Set font style and size
-        textArea.setForeground(Color.WHITE); // Set text color
-        textArea.setBackground(Color.darkGray); // Set background color
+        textArea.setForeground(ColorsFonts.darkPurple); // Set text color
+        textArea.setBackground(ColorsFonts.lightPurple); // Set background color
 
         // Create a JScrollPane to allow scrolling for the text area
         JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setBounds(100, 210, 530, 170); // Set position and size
+        scrollPane.setForeground(ColorsFonts.lightPurple);
 
         // Create a label for faculty information
         JLabel location = new JLabel();
@@ -73,14 +74,14 @@ public class Details {
         location.setVerticalAlignment(JLabel.CENTER);
         location.setHorizontalAlignment(JLabel.LEFT);
         location.setFont(new Font("Comic Sans", Font.PLAIN, 20));
-        location.setForeground(Color.WHITE);
+        location.setForeground(ColorsFonts.darkPurple);
         location.setBounds(100, 160, 700, 50); // Set position and size
 
         // Create a JPanel to hold all components
         JPanel panel = new JPanel();
         panel.setLayout(null); // Use null layout for manual positioning
         panel.setBounds(0, 0, 1000, 900); // Set position and size
-        panel.setBackground(Color.darkGray); // Set panel background color
+        panel.setBackground(ColorsFonts.lightPurple); // Set panel background color
 
         // Add components to the panel
         panel.add(back);
@@ -98,9 +99,9 @@ public class Details {
     // Method to create a styled button
     public static JButton createStyledButton(String text) {
         JButton button = new JButton(text);
-        button.setBackground(new Color(8, 78, 65)); // Set button background color
+        button.setBackground(ColorsFonts.darkPurple); // Set button background color
         button.setFont(new Font("Comic Sans", Font.PLAIN, 20)); // Set font style and size
-        button.setForeground(Color.WHITE); // Set font color
+        button.setForeground(ColorsFonts.lightPurple); // Set font color
         button.setFocusPainted(false); // Disable focus painting
         button.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15)); // Set button border
 
