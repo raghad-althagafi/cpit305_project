@@ -136,6 +136,14 @@ public class ADDevent {
                     "The event has been added\n"  );
             }
         });
+        returnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+              
+                frame.dispose();
+              
+            }
+        });
         return frame; // Return the complete frame with components
     }
     
