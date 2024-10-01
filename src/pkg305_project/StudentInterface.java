@@ -15,6 +15,11 @@ import java.awt.event.ActionListener;
  * @author shaha
  */
 public class StudentInterface {
+    private User user;
+    
+    public StudentInterface(User user){
+    this.user = user;
+}
     // Constructor for the StudentInterface class
     public StudentInterface() {
         // Sample data for the event
@@ -67,6 +72,15 @@ public class StudentInterface {
         JButton userButton = createStyledButton("\uD83D\uDC64 " + name);
         userButton.setBounds(20, 30, 200, 50); // Set position and size of the button
         panel.add(userButton); // Add the button to the left panel
+        
+        userButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //open login frame
+                infoPage iPage = new infoPage(user);
+                iPage.showPage();
+            }
+        });
 
         // Set up the main frame for the student interface
         JFrame studentFrame = new JFrame("Student");
@@ -100,7 +114,7 @@ public class StudentInterface {
         viewButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Details(); // Open details frame on button click
+                Details s = new Details(); // Open details frame on button click
             }
         });
 
