@@ -122,7 +122,7 @@ public class infoPage {
                      MainFrame mainFrame = new MainFrame();
 
                     //close the current frame
-                    ((JFrame) SwingUtilities.getWindowAncestor(logButton)).dispose();
+                    ((JFrame) SwingUtilities.getWindowAncestor(DelButton)).dispose();
                 }
             }
 
@@ -150,7 +150,7 @@ public class infoPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                  //close the current frame
-                    ((JFrame) SwingUtilities.getWindowAncestor(logButton)).dispose();
+                    ((JFrame) SwingUtilities.getWindowAncestor(Bbutton)).dispose();
             }
 
     

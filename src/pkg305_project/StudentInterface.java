@@ -17,11 +17,11 @@ import java.awt.event.ActionListener;
 public class StudentInterface {
     private User user;
     
-    public StudentInterface(User user){
-    this.user = user;
-}
+   
     // Constructor for the StudentInterface class
-    public StudentInterface() {
+    public StudentInterface(User user) {
+        
+        this.user = user;
         // Sample data for the event
         String name = "Shahad";
         String eventName = "Event Name";
@@ -75,10 +75,10 @@ public class StudentInterface {
         
         userButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                //open login frame
-                infoPage iPage = new infoPage(user);
-                iPage.showPage();
+             public void actionPerformed(ActionEvent e) {
+               infoPage iPage = new infoPage(user);
+               iPage.showPage();
+               
             }
         });
 

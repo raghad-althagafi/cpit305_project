@@ -114,8 +114,8 @@ public class Login {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //open register frame
-                StudentInterface s = new StudentInterface();
                 User user = new User("Leena", 0, "r20zxc");
+                StudentInterface s = new StudentInterface(user);                      
                 dHomePage dp = new dHomePage(user);
                 dp.showPage();
             }
