@@ -138,6 +138,7 @@ public class Register {
         panel.add(exit);
         
         
+        
         //clicking Login button
         login.addActionListener(new ActionListener() {
             @Override

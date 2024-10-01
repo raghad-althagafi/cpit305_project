@@ -46,7 +46,7 @@ public class Login {
         //set color of label
         Login.setForeground(ColorsFonts.darkPurple);
         //set font of label
-        Login.setFont(fontTitle);
+        Login.setFont(ColorsFonts.fontTitle);
         //add it to the panel
         panel.add(Login);
         
@@ -109,6 +109,18 @@ public class Login {
         panel.add(exit);
         
         
+        //clicking login button
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //open register frame
+                StudentInterface s = new StudentInterface();
+                User user = new User("Leena", 0, "r20zxc");
+                dHomePage dp = new dHomePage(user);
+                dp.showPage();
+            }
+        });
+        
         //clicking register button
         registerButton.addActionListener(new ActionListener() {
             @Override
@@ -117,8 +129,6 @@ public class Login {
                 Register r = new Register();
             }
         });
-        
-        
         
         
         //clicking exit button
@@ -130,21 +140,12 @@ public class Login {
         });
         
         
-        //clicking login button
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new StudentInterface();
-            }
-        });
-        
-        
         }
     
     //method to set color and font of buttons
     public JButton button(JButton button){
         //set font of  button
-        button.setFont(fontText);
+        button.setFont(ColorsFonts.fontText);
         //set color of button text
         button.setForeground(Color.WHITE);
         //set background color of button
@@ -157,7 +158,7 @@ public class Login {
     //method to set color and font of label
     public JLabel label(JLabel label){
         //set font of label
-        label.setFont(fontText);
+        label.setFont(ColorsFonts.fontText);
         //set color of label
         label.setForeground(ColorsFonts.darkPurple); 
         return label;
