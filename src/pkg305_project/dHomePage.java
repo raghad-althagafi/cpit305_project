@@ -54,7 +54,7 @@ public class dHomePage {
         JPanel panel = new JPanel();
         panel.setBackground(ColorsFonts.midPurpule);
         panel.setBounds(0, 0, 300, 900);
-        panel.setLayout(null); // Use null layout for manual positioning
+        panel.setLayout(null); 
         addCheckboxes(panel); // Add checkboxes to the left panel
         //exit button
         JButton exit = createStyledButton("Exit");
@@ -162,7 +162,7 @@ public class dHomePage {
 
         JLabel el1 = new JLabel();
         el1.setText(EventName);
-        el1.setFont(new Font("Comic Sans", Font.PLAIN, 20));
+        el1.setFont(ColorsFonts.fontButton);
         el1.setForeground(ColorsFonts.darkPurple);
         el1.setVisible(true);
         el1.setBounds(180, 8, 700, 50);

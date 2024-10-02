@@ -84,6 +84,7 @@ public class StudentInterface {
         
         // Create an exit button
         JButton exitButton = createStyledButton("Exit");
+        exitButton.setFont(ColorsFonts.fontButton);
         exitButton.setBounds(20, 750, 160, 50); // Set position and size of the button
         panel.add(exitButton); // Add the button to the left panel
         
