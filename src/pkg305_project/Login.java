@@ -113,7 +113,7 @@ public class Login {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //open register frame
+                //open student and doctor frames
                 User user = new User("Leena", 0, "r20zxc");
                 StudentInterface s = new StudentInterface(user);                      
                 dHomePage dp = new dHomePage(user);
