@@ -14,6 +14,7 @@ import java.awt.Font;
  */
 public class ColorsFonts {
     
+    public static final Font smallText = new Font("Serif",Font.PLAIN, 25);
     public static final Font fontText = new Font("Serif",Font.BOLD, 25);
     public static final Font fontTitle = new Font("Serif",Font.BOLD, 40);
     public static final Font fontButton = new Font("Serif",Font.BOLD, 30);

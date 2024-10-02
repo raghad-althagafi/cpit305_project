@@ -15,7 +15,7 @@ public class Details {
     public Details() {
         // Create a JFrame for the details window
         JFrame details = new JFrame("Details");
-        details.setSize(700, 450); // Set size of the frame
+        details.setSize(800, 600); // Set size of the frame
         details.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close application on exit
         details.setBackground(ColorsFonts.lightPurple); // Set background color (not effective on JFrame)
 
@@ -36,9 +36,9 @@ public class Details {
         events.setText("Event Name");
         events.setVerticalAlignment(JLabel.TOP); // Align label to the top
         events.setHorizontalAlignment(JLabel.CENTER); // Center align text
-        events.setFont(new Font("Comic Sans", Font.BOLD, 25)); // Set font style and size
+        events.setFont(ColorsFonts.fontButton); // Set font style and size
         events.setForeground(ColorsFonts.darkPurple); // Set text color
-        events.setBounds(70, 100, 200, 100); // Set position and size of the label
+        events.setBounds(80, 100, 200, 100); // Set position and size of the label
 
         // Create a label for event details (time)
         JLabel details1 = new JLabel();
@@ -46,9 +46,9 @@ public class Details {
         details1.setText("Event Time: " + day);
         details1.setVerticalAlignment(JLabel.CENTER);
         details1.setHorizontalAlignment(JLabel.LEFT);
-        details1.setFont(new Font("Comic Sans", Font.PLAIN, 20));
+        details1.setFont(ColorsFonts.fontText);
         details1.setForeground(ColorsFonts.darkPurple);
-        details1.setBounds(100, 130, 700, 50); // Set position and size
+        details1.setBounds(100, 160, 700, 100); // Set position and size
 
         // Create a JTextPane for additional text
         JTextPane textArea = new JTextPane();
@@ -58,24 +58,24 @@ public class Details {
                 "This area supports scrolling if the text is long enough.\n" +
                 "You can customize this text however you like.\n\n" +
                 "End of text.");
-        textArea.setFont(new Font("Comic Sans", Font.PLAIN, 20)); // Set font style and size
+        textArea.setFont(ColorsFonts.fontText); // Set font style and size
         textArea.setForeground(ColorsFonts.darkPurple); // Set text color
         textArea.setBackground(ColorsFonts.lightPurple); // Set background color
 
         // Create a JScrollPane to allow scrolling for the text area
         JScrollPane scrollPane = new JScrollPane(textArea);
-        scrollPane.setBounds(100, 210, 530, 170); // Set position and size
+        scrollPane.setBounds(100, 260, 530, 170); // Set position and size
         scrollPane.setForeground(ColorsFonts.lightPurple);
 
         // Create a label for faculty information
         JLabel location = new JLabel();
-        String faculty = "Computing and Information Technology"; // Sample faculty name
+        String faculty = "Computing"; // Sample faculty name
         location.setText("Faculty: " + faculty);
         location.setVerticalAlignment(JLabel.CENTER);
         location.setHorizontalAlignment(JLabel.LEFT);
-        location.setFont(new Font("Comic Sans", Font.PLAIN, 20));
+        location.setFont(ColorsFonts.fontText);
         location.setForeground(ColorsFonts.darkPurple);
-        location.setBounds(100, 160, 700, 50); // Set position and size
+        location.setBounds(100, 140, 700, 50); // Set position and size
 
         // Create a JPanel to hold all components
         JPanel panel = new JPanel();
@@ -100,7 +100,7 @@ public class Details {
     public static JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setBackground(ColorsFonts.darkPurple); // Set button background color
-        button.setFont(new Font("Comic Sans", Font.PLAIN, 20)); // Set font style and size
+        button.setFont(ColorsFonts.smallText); // Set font style and size
         button.setForeground(ColorsFonts.lightPurple); // Set font color
         button.setFocusPainted(false); // Disable focus painting
         button.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15)); // Set button border

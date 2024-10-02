@@ -133,7 +133,7 @@ public class dHomePage {
 
         JButton button = new JButton(text);
         button.setBackground(ColorsFonts.darkPurple);
-        button.setFont(new Font("Comic Sans", Font.PLAIN, 20));
+        button.setFont(ColorsFonts.smallText);
         button.setForeground(Color.WHITE);
         button.setFocusPainted(false);
         button.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));

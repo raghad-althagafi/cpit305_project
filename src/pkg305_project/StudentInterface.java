@@ -110,7 +110,7 @@ public class StudentInterface {
     public static JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setBackground(ColorsFonts.darkPurple); // Set button background color
-        button.setFont(new Font("Comic Sans", Font.PLAIN, 20)); // Set font style
+        button.setFont(ColorsFonts.smallText); // Set font style
         button.setForeground(Color.WHITE); // Set font color
         button.setFocusPainted(false); // Remove focus painting
         button.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15)); // Set button border
@@ -134,13 +134,13 @@ public class StudentInterface {
 
         // Create event name label
         JLabel eventLabel = new JLabel(eventName);
-        eventLabel.setFont(new Font("Comic Sans", Font.BOLD, 20));
+        eventLabel.setFont(ColorsFonts.fontButton);
         eventLabel.setForeground(ColorsFonts.darkPurple);
         eventLabel.setBounds(180, 8, 700, 50); // Set position and size
 
         // Create event start label
         JLabel detailsLabel = new JLabel(eventStart);
-        detailsLabel.setFont(new Font("Comic Sans", Font.PLAIN, 20));
+        detailsLabel.setFont(ColorsFonts.fontText);
         detailsLabel.setForeground(ColorsFonts.darkPurple);
         detailsLabel.setBounds(180, 55, 700, 50); // Set position and size
 
@@ -170,15 +170,16 @@ public class StudentInterface {
     // Method to add checkboxes to the given panel
     public static void addCheckboxes(JPanel panel) {
         // Create faculty checkboxes
-        Checkbox FEA = new Checkbox("Economics and Administration");
+        Checkbox FEA = new Checkbox("Econ & Admin");
         Checkbox Eng = new Checkbox("Engineering");
-        Checkbox FCIT = new Checkbox("Computing and Information Technology");
+        Checkbox FCIT = new Checkbox("Computing");
         Checkbox Law = new Checkbox("Law");
         Checkbox Science = new Checkbox("Science");
 
         // Create label for faculty section
         JLabel label = new JLabel("Faculty:");
-        label.setFont(new Font("Comic Sans", Font.PLAIN, 20));
+        //new Font("Comic Sans", Font.PLAIN, 20)
+        label.setFont(ColorsFonts.fontButton);
         label.setForeground(Color.WHITE);
         label.setBounds(20, 150, 200, 50); // Set position and size
 
@@ -190,7 +191,8 @@ public class StudentInterface {
         Science.setBounds(20, 360, 300, 30);
 
         // Set font and color for checkboxes
-        Font checkboxFont = new Font("Comic Sans", Font.PLAIN, 15);
+        //new Font("Comic Sans", Font.PLAIN, 15)
+        Font checkboxFont = ColorsFonts.fontText;
         FEA.setFont(checkboxFont); FEA.setForeground(Color.WHITE);
         Eng.setFont(checkboxFont); Eng.setForeground(Color.WHITE);
         FCIT.setFont(checkboxFont); FCIT.setForeground(Color.WHITE);
