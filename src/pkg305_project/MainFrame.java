@@ -5,10 +5,12 @@
  */
 package pkg305_project;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,6 +35,13 @@ public class MainFrame {
         frame.add(panel);
         //set layout
         panel.setLayout(null);
+        
+        
+        //logo of system
+        ImageIcon imageIcon = new ImageIcon("logo2.jpeg");
+        JLabel imageLabel = new JLabel(imageIcon);
+        imageLabel.setBounds(390, 170, imageIcon.getIconWidth(), imageIcon.getIconHeight());
+        panel.add(imageLabel, BorderLayout.CENTER);
         
         
         //hello label

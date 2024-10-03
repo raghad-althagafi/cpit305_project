@@ -18,7 +18,11 @@ public class Main {
      */
     public static void main(String[] args) {
         //create main frame
-        MainFrame mainFrame = new MainFrame();
+        new MainFrame();
+        //create login frame
+        new Login();
+        //create new register frame
+        new Register();
     }
     
 }
