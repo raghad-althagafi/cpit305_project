@@ -30,6 +30,10 @@ public class Main {
         //create information page
         infoPage iPage = new infoPage(user);
         iPage.showPage();
+        //Add event page
+         ADDevent frameCreator = new ADDevent();
+        JFrame frame = frameCreator.createFrame("Add Event");
+        frame.setVisible(true);
     }
 
 }
