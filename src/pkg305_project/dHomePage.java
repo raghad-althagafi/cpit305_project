@@ -59,7 +59,7 @@ public class dHomePage {
         //exit button
         JButton exit = createStyledButton("Exit");
         exit.setForeground(Color.white);
-        exit.setBounds(30, 750, 200, 50);
+        exit.setBounds(20, 750, 160, 50);
         exit.setFont(ColorsFonts.fontButton);
 
         //create the right panel
