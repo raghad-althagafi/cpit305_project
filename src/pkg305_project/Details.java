@@ -21,7 +21,8 @@ public class Details {
 
         // Create a 'Back' button
         JButton back = createStyledButton("Back");
-        back.setBounds(10, 25, 140, 40); // Set position and size of the button
+        //(10, 25, 140, 40)
+        back.setBounds(20, 25, 160, 50); // Set position and size of the button
 
         // Add action listener to the 'Back' button
         back.addActionListener(new ActionListener() {
@@ -100,8 +101,8 @@ public class Details {
     public static JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setBackground(ColorsFonts.darkPurple); // Set button background color
-        button.setFont(ColorsFonts.smallText); // Set font style and size
-        button.setForeground(ColorsFonts.lightPurple); // Set font color
+        button.setFont(ColorsFonts.fontButton); // Set font style and size
+        button.setForeground(Color.WHITE); // Set font color
         button.setFocusPainted(false); // Disable focus painting
         button.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15)); // Set button border
 

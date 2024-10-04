@@ -48,9 +48,11 @@ public class ADDevent {
         e.setBounds(340, 50, 200, 40); 
         frame.add(e);
          
-        returnButton = new JButton("Return");
-        returnButton.setBounds(800, 15, 120, 30);
-        returnButton.setFont(new Font("Verdana", Font.BOLD, 18));
+        returnButton = new JButton("Back");
+        //(800, 15, 10, 30) (20, 750, 160, 50)
+        returnButton.setBounds(20, 25, 160, 50);
+        //new Font("Verdana", Font.BOLD, 18)
+        returnButton.setFont(ColorsFonts.fontButton);
         returnButton.setForeground(Color.WHITE);
         returnButton.setBackground(ColorsFonts.darkPurple);
         frame.add(returnButton);
