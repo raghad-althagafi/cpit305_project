@@ -23,6 +23,13 @@ public class Main {
         new Login();
         //create new register frame
         new Register();
+        // create doctor home page
+        User user = new User("Raghad", 0, "r20zxc");
+        dHomePage dp = new dHomePage(user);
+        dp.showPage();
+        //create information page
+        infoPage iPage = new infoPage(user);
+        iPage.showPage();
     }
-    
+
 }
