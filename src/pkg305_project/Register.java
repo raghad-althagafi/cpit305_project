@@ -95,28 +95,14 @@ public class Register {
         //add pass TextField to panel
         panel.add(passText);
         
-        
-        //Confirm password label
-        JLabel confPass= new JLabel("Confirm Password");
-        //set color and font of label
-        confPass = label(confPass);
-        confPass.setBounds(200, 550, 350, 30);
-        //add Confirm pass TextField to panel
-        panel.add(confPass);
-        
-        
-        //confirm passField
-        JPasswordField cofText = new JPasswordField();
-        cofText.setBounds(420, 550, 350, 40);
-        //add confirm passField to panel
-        panel.add(cofText);
+       
         
        
         //Register button
         JButton registerButton = new JButton("Register");
         //set color and font button
         registerButton = button(registerButton);
-        registerButton.setBounds(340, 670, 350, 40);
+        registerButton.setBounds(340, 570, 350, 40);
         //add Register button to panel
         panel.add(registerButton);
         
@@ -125,7 +111,7 @@ public class Register {
         JButton login = new JButton("Back to Login");
         //set color and font button
         login = button(login);
-        login.setBounds(340, 740, 350, 40);
+        login.setBounds(340, 640, 350, 40);
         //add login button to panel
         panel.add(login);
         
