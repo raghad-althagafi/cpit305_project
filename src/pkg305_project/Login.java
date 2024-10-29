@@ -113,11 +113,27 @@ public class Login {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //open student and doctor frames
-                User user = new User("Leena", 0, "r20zxc");
-                StudentInterface s = new StudentInterface(user);                      
-                dHomePage dp = new dHomePage(user);
-                dp.showPage();
+                
+                //create DB object 
+                Database db = new Database();
+                //convert user inputs to text
+                String userInput = userText.getText();
+                String passInput = passText.getText();
+                
+                //make user object
+                User user = new User(userInput, 0, "r20zxc");
+                
+                //check user login
+                if (db.checkLogin(userInput, passInput) == true){
+                    
+                    if(db.checkRole(userInput)==true){ //if student
+                        StudentInterface st = new StudentInterface(user);
+                    }
+                    else if(db.checkRole(userInput)==false){ //if Dr
+                        dHomePage dp = new dHomePage(user);
+                        dp.showPage();
+                    }
+                }
             }
         });
         

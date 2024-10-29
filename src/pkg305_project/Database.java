@@ -36,7 +36,7 @@ public class Database {
     public void createDB(){
     
     //statment for create DB
-    String createDatabase = "CREATE DATABASE IF NOT EXISTS KAUEvents";
+    String createDatabase = "CREATE DATABASE IF NOT EXISTS KAU_Events";
     
     //connect to mySql server
     try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "Leena1234");
@@ -55,8 +55,8 @@ public class Database {
     // Connect to the database
     private void connectToDatabase() {
         try {
-            //Set the connection to KAUEVENTS DB
-            String connectionURL = "jdbc:mysql://localhost:3306/KAUEvents";
+            //Set the connection to KAU_EVENTS DB
+            String connectionURL = "jdbc:mysql://localhost:3306/KAU_Events";
             con = DriverManager.getConnection(connectionURL, "root", "Leena1234");
             System.out.println("Connected to the database.");
         } catch (SQLException s) {
@@ -92,21 +92,27 @@ public class Database {
     public void registerUser(String username, String email, String password){
         
         //insert user row
-        String user = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+        String user = "INSERT INTO users (username, email, role, password) VALUES (?, ?, ?, ?)";
         
         try (PreparedStatement st = con.prepareStatement(user)){
             
             //set the values of row
             st.setString(1, username);
             st.setString(2, email);
-            st.setString(3, password);
+            if(email.toLowerCase().contains("stu")){
+                st.setString(3, "Student");
+            }
+            else{
+                st.setString(3, "Doctor");
+            }
+            st.setString(4, password);
             
             //excute statment
             st.executeUpdate();
             System.out.println("user added!");
         }
         catch (SQLException s){
-         System.out.println("SQL statement is not executed!");
+         System.out.println("SQL statement register is not executed!");
         }
     }
     
@@ -145,9 +151,36 @@ public class Database {
         return false;
     }
     
-//    public boolean checkRole(){
-//        
-//    }
+        public boolean checkRole(String username){
+            
+            String query = "SELECT role FROM users WHERE username=?";
+            
+            try(PreparedStatement st = con.prepareStatement(query)){
+                //set the values of username
+                st.setString(1, username);
+                //excute statment
+                ResultSet rs = st.executeQuery();
+                
+                //if user exists
+                if(rs.next()){
+                //retrive role of user
+                String role = rs.getString("role");
+                
+                //check role
+                if(role.equalsIgnoreCase("Student")){
+                    return true;
+                }
+                else{ //if Dr
+                    return false;
+                }
+                
+            }
+            }
+            catch (SQLException s){
+            System.out.println("SQL statement is not executed!");
+            }
+            return false;
+        }
     
     
      
@@ -172,3 +205,4 @@ public class Database {
         }
     }
 }
+

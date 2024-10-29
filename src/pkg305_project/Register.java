@@ -123,6 +123,34 @@ public class Register {
         exit = button(exit);
         panel.add(exit);
         
+        //clicking Register button
+        registerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //create DB object 
+                Database db = new Database();
+                
+                //convert user inputs to text
+                String userInput = userText.getText();
+                String emailInput = emailText.getText();
+                String passInput = passText.getText();
+                
+                //register user inputs in Database
+                db.registerUser(userInput, emailInput, passInput);
+                //create user object
+                User user = new User(userInput, 0, emailInput);
+                
+                //Check if its Dr or student to open appropriate frame
+                if(emailInput.toLowerCase().contains("stu")){ //if student
+                new StudentInterface(user);
+                }
+                
+                 else{ //if its Dr
+                    dHomePage dp = new dHomePage(user);
+                    dp.showPage();
+                 }
+            }
+        });
         
         
         //clicking Login button
