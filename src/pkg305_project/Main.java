@@ -36,6 +36,15 @@ public class Main {
         frame.setVisible(true);
         new Details();
         StudentInterface st = new StudentInterface(user);
+        
+        
+        //database 
+        createDB();
+    }
+    
+    public static void createDB(){
+        //database 
+        Database db = new Database();
     }
 
 }
