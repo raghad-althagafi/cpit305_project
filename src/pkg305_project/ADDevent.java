@@ -73,7 +73,7 @@ public class ADDevent {
         JLabel dateLabel = new JLabel("Date:");
         dateLabel.setFont(ColorsFonts.fontText);
         dateLabel.setForeground(ColorsFonts.darkPurple);
-        dateLabel.setBounds(140, 200, 150, 40);
+        dateLabel.setBounds(140, 190, 150, 40);
         frame.add(dateLabel);
 
         dateField = new JTextField();
@@ -84,7 +84,7 @@ public class ADDevent {
         JLabel timeLabel = new JLabel("Time:");
        timeLabel.setFont(ColorsFonts.fontText);
        timeLabel.setForeground(ColorsFonts.darkPurple);
-        timeLabel.setBounds(490, 200, 150, 40);
+        timeLabel.setBounds(490, 190, 150, 40);
         frame.add(timeLabel);
 
         timeField = new JTextField();

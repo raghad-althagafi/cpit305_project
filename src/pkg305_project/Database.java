@@ -24,10 +24,11 @@ public class Database {
         //(1) create the database
         createDB();
         //(2) connect to database
-        connectToDatabase();
+       connectToDatabase();
         //(3) create DB tables 
         createTables();
-        
+        //create event table 
+        createTablesevent();
     }
     
     //------------------------------------
@@ -39,7 +40,7 @@ public class Database {
     String createDatabase = "CREATE DATABASE IF NOT EXISTS KAU_Events";
     
     //connect to mySql server
-    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "Leena1234");
+    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "KSA_Raghad");
              Statement st = conn.createStatement()) {
             // Execute statement to create the database
             st.executeUpdate(createDatabase);
@@ -57,7 +58,7 @@ public class Database {
         try {
             //Set the connection to KAU_EVENTS DB
             String connectionURL = "jdbc:mysql://localhost:3306/KAU_Events";
-            con = DriverManager.getConnection(connectionURL, "root", "Leena1234");
+            con = DriverManager.getConnection(connectionURL, "root", "KSA_Raghad");
             System.out.println("Connected to the database.");
         } catch (SQLException s) {
             System.out.println("SQL statement for connecting to the database is not executed!");
@@ -202,6 +203,46 @@ public class Database {
         } catch (SQLException s) {
             System.out.println("SQL statement for retrieving users is not executed!");
             s.printStackTrace();
+        }
+    }
+        //------------------------------------
+    // Method to create tables in the database
+    public void createTablesevent() {
+        // SQL statement to create a table for events
+        String createEventsTable = "CREATE TABLE IF NOT EXISTS events ("
+                + "eventID INT AUTO_INCREMENT PRIMARY KEY, "
+                + "eventName VARCHAR(255), "
+                + "eventDate VARCHAR(255), "
+                + "eventTime VARCHAR(255), "
+                + "location VARCHAR(255), "
+                + "college VARCHAR(255), "
+                + "details TEXT"
+                + ")";
+        
+        try (Statement st = con.createStatement()) {
+            st.executeUpdate(createEventsTable);
+            System.out.println("Events table created if not exists.");
+        } catch (SQLException s) {
+            System.out.println("SQL statement for table creation is not executed!");
+        }
+    }
+    
+    // Method to add event to the database
+    public void addEvent(String eventName, String date, String time, String location, String college, String details) {
+        String insertEventSQL = "INSERT INTO events (eventName, eventDate, eventTime, location, college, details) VALUES (?, ?, ?, ?, ?, ?)";
+        
+        try (PreparedStatement pstmt = con.prepareStatement(insertEventSQL)) {
+            pstmt.setString(1, eventName);
+            pstmt.setString(2, date);
+            pstmt.setString(3, time);
+            pstmt.setString(4, location);
+            pstmt.setString(5, college);
+            pstmt.setString(6, details);
+
+            pstmt.executeUpdate();
+            System.out.println("Event added successfully!");
+        } catch (SQLException e) {
+            System.out.println("Failed to add event: " + e.getMessage());
         }
     }
 }
