@@ -45,6 +45,8 @@ public class Main {
     public static void createDB(){
         //database 
         Database db = new Database();
+        
+        db.printAllUsers();
     }
 
 }
