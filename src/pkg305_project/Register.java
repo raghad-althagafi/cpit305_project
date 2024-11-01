@@ -138,7 +138,7 @@ public class Register {
                 //register user inputs in Database
                 db.registerUser(userInput, emailInput, passInput);
                 //create user object
-                User user = new User(userInput, 0, emailInput);
+                User user = new User(userInput,db);
                 
                 //Check if its Dr or student to open appropriate frame
                 if(emailInput.toLowerCase().contains("stu")){ //if student

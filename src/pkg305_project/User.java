@@ -10,27 +10,27 @@ package pkg305_project;
  * @author AHC
  */
 public class User {
-   private String name;
-   //private String faculty;
-   private long password;
+   private String Username;
+   private Database db;
+   private String password;
    private String email;
 
-    public User(String name, long password, String email) {
-        this.name = name;
-        //this.faculty = faculty;
-        this.password = password;
-        this.email = email;
+    public User(String Username,Database db) {
+        this.Username = Username;
+        this.db = db;
+        String[] emailAndPassword = db.findUserInformation(Username);
+         this.email = emailAndPassword[0];
+        this.password = emailAndPassword[1];
+
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return Username;
     }
 
-//    public String getFaculty() {
-//        return faculty;
-//    }
 
-    public long getPassword() {
+
+    public String getPassword() {
         return password;
     }
 
@@ -38,20 +38,25 @@ public class User {
         return email;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String Username) {
+        this.Username = Username;
     }
 
-//    public void setFaculty(String faculty) {
-//        this.faculty = faculty;
-//    }
 
-    public void setPassword(long password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Database getDb() {
+        return db;
+    }
+
+    public void setDb(Database db) {
+        this.db = db;
     }
    
    

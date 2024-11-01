@@ -20,22 +20,22 @@ public class Main {
         //create main frame
         new MainFrame();
         //create login frame
-        new Login();
+        //new Login();
         //create new register frame
-        new Register();
+       // new Register();
         // create doctor home page
-        User user = new User("Raghad", 0, "r20zxc");
-        dHomePage dp = new dHomePage(user);
-        dp.showPage();
+//        User user = new User("Raghad", 0, "r20zxc");
+//        dHomePage dp = new dHomePage(user);
+//        dp.showPage();
         //create information page
-        infoPage iPage = new infoPage(user);
-        iPage.showPage();
+//        infoPage iPage = new infoPage(user);
+//        iPage.showPage();
         //Add event page
-         ADDevent frameCreator = new ADDevent();
-        JFrame frame = frameCreator.createFrame("Add Event");
-        frame.setVisible(true);
-        new Details();
-        StudentInterface st = new StudentInterface(user);
+//         ADDevent frameCreator = new ADDevent();
+//        JFrame frame = frameCreator.createFrame("Add Event");
+//        frame.setVisible(true);
+//        new Details();
+//        StudentInterface st = new StudentInterface(user);
         
         
         //database 
@@ -46,7 +46,11 @@ public class Main {
         //database 
         Database db = new Database();
         
-        db.printAllUsers();
+        //db.printAllUsers();
+        
+        //System.out.println(db.findUser("raghad"));
+//        boolean t = db.UpdateUser("raghad", "rraghad", "rraghad", "rraghad");
+//        System.out.println(t);
     }
 
 }

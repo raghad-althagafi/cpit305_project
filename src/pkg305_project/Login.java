@@ -121,7 +121,7 @@ public class Login {
                 String passInput = passText.getText();
                 
                 //make user object
-                User user = new User(userInput, 0, "r20zxc");
+                User user = new User(userInput,db);
                 
                 //check user login
                 if (db.checkLogin(userInput, passInput) == true){

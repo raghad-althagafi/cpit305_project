@@ -26,7 +26,7 @@ public class dHomePage {
 
     public void showPage() {
 
-        String name = user.getName();
+        String name = user.getUsername();
         String EventName = "Event Name";
         String EventStart = "Day of start";
 

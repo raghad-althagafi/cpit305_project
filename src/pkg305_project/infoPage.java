@@ -64,7 +64,7 @@ public class infoPage {
         userPassword.setBounds(235, 120, 500, 500);
 
         //textFields
-        JTextField nameTF = new JTextField(user.getName());
+        JTextField nameTF = new JTextField(user.getUsername());
         JTextField EmailTF = new JTextField(user.getEmail());
         JTextField PasswordTF = new JTextField(String.valueOf(user.getPassword()));
        
@@ -105,7 +105,14 @@ public class infoPage {
         Cbutton.addActionListener(new ActionListener() {   
             @Override
             public void actionPerformed(ActionEvent e) {
+                boolean updated = user.getDb().UpdateUser(user.getUsername(), nameTF.getText(), EmailTF.getText(), PasswordTF.getText());
+                //Checks if it is updated or not
+                if(updated){
                 JOptionPane.showMessageDialog(f, "Your information has been successfully updated.", "Profile update", JOptionPane.PLAIN_MESSAGE);
+                }
+                else{
+                 JOptionPane.showMessageDialog(f, "Your information did not updated.", "Profile update", JOptionPane.PLAIN_MESSAGE);   
+                }
             }
 
     

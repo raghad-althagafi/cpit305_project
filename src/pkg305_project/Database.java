@@ -40,7 +40,7 @@ public class Database {
     String createDatabase = "CREATE DATABASE IF NOT EXISTS KAUEvents";
     
     //connect to mySql server
-    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "Leena1234");
+    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "raghad");
              Statement st = conn.createStatement()) {
             // Execute statement to create the database
             st.executeUpdate(createDatabase);
@@ -58,7 +58,7 @@ public class Database {
         try {
             //Set the connection to KAU_EVENTS DB
             String connectionURL = "jdbc:mysql://localhost:3306/KAUEvents";
-            con = DriverManager.getConnection(connectionURL, "root", "Leena1234");
+            con = DriverManager.getConnection(connectionURL, "root", "raghad");
             System.out.println("Connected to the database.");
         } catch (SQLException s) {
             System.out.println("SQL statement for connecting to the database is not executed!");
@@ -245,5 +245,51 @@ public class Database {
             System.out.println("Failed to add event: " + e.getMessage());
         }
     }
+    
+    
+    //method to find user's email and password
+    public String[] findUserInformation(String username) {
+        String email = null, password = null;
+        try {
+            String query = "SELECT email, password FROM users WHERE username = ?";
+            PreparedStatement st = con.prepareStatement(query);
+            st.setString(1, username); 
+
+            ResultSet result = st.executeQuery();
+            if (result.next()) {
+                email = result.getString("email");
+                password = result.getString("password");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new String[] { email, password };
+    }
+    
+    //method to update user's information
+    public boolean UpdateUser(String oldUsername, String newUsername, String email, String password) {
+
+        String query = "UPDATE users SET username = ?, email = ?, password = ? WHERE username = ?";
+
+        try (PreparedStatement st = con.prepareStatement(query)) {
+            st.setString(1, newUsername); // Set the new username
+            st.setString(2, email);      // Set the new email
+            st.setString(3, password);   // Set the new password
+            st.setString(4, oldUsername); // Set the old username (condition)
+
+            int rowsAffected = st.executeUpdate();
+            if (rowsAffected > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println("Failed to update user: " + e.getMessage());
+        }
+        return false;
+    }
+    
+    
 }
 
