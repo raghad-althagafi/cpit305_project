@@ -249,9 +249,9 @@ public class Database {
     
     //method to find user's email and password
     public String[] findUserInformation(String username) {
-        String email = null, password = null;
+        String email = null, password = null, userName = null;
         try {
-            String query = "SELECT email, password FROM users WHERE username = ?";
+            String query = "SELECT email, password, username FROM users WHERE username = ?";
             PreparedStatement st = con.prepareStatement(query);
             st.setString(1, username); 
 
@@ -259,12 +259,13 @@ public class Database {
             if (result.next()) {
                 email = result.getString("email");
                 password = result.getString("password");
+                userName = result.getString("username");
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new String[] { email, password };
+        return new String[] { email, password ,userName};
     }
     
     //method to update user's information
@@ -280,8 +281,10 @@ public class Database {
 
             int rowsAffected = st.executeUpdate();
             if (rowsAffected > 0) {
+                //if user information successfully apdated
                 return true;
             } else {
+                //failed to update information
                 return false;
             }
         } catch (SQLException e) {
@@ -290,6 +293,27 @@ public class Database {
         return false;
     }
     
+     public boolean deleteUser(String username) {
+        String query = "DELETE FROM users WHERE username = ?";
+        try (PreparedStatement st = con.prepareStatement(query)) {
+            st.setString(1, username);
+
+            int rowsAffected = st.executeUpdate();
+
+            if (rowsAffected > 0) {
+                //if user successfully deleted
+                return true;
+            } else {
+                //failed to delete user
+                return false;
+            }
+
+        } catch (SQLException s) {
+            System.out.println("SQL statement for user deletion is not executed!");
+            s.printStackTrace();
+            return false;
+        }
+    }
     
 }
 

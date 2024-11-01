@@ -112,6 +112,7 @@ public class dHomePage {
         userButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Doctor.dispose();
                 infoPage iPage = new infoPage(user);
                 iPage.showPage();
 

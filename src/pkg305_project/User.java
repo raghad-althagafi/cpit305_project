@@ -25,31 +25,23 @@ public class User {
     }
 
     public String getUsername() {
-        return Username;
+        return db.findUserInformation(Username)[2];
     }
 
 
 
     public String getPassword() {
-        return password;
+        return db.findUserInformation(Username)[1];
     }
 
     public String getEmail() {
-        return email;
+        return db.findUserInformation(Username)[0];
     }
 
     public void setUsername(String Username) {
         this.Username = Username;
     }
 
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public Database getDb() {
         return db;

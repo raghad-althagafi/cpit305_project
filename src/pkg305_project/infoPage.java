@@ -109,6 +109,9 @@ public class infoPage {
                 //Checks if it is updated or not
                 if(updated){
                 JOptionPane.showMessageDialog(f, "Your information has been successfully updated.", "Profile update", JOptionPane.PLAIN_MESSAGE);
+                //update user's name in user class
+                user.setUsername(nameTF.getText());
+                
                 }
                 else{
                  JOptionPane.showMessageDialog(f, "Your information did not updated.", "Profile update", JOptionPane.PLAIN_MESSAGE);   
@@ -125,16 +128,16 @@ public class infoPage {
                 int response = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete this account?","Quesiton", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
             // Check if the user clicked "Yes"
                 if (response == JOptionPane.YES_OPTION) {
-                    // If Yes show the main page
-                     MainFrame mainFrame = new MainFrame();
-
+                    user.getDb().deleteUser(user.getUsername());
                     //close the current frame
-                    ((JFrame) SwingUtilities.getWindowAncestor(DelButton)).dispose();
+                    ((JFrame) SwingUtilities.getWindowAncestor(DelButton)).dispose();                    
+                    // If Yes show the main page
+                    MainFrame mainFrame = new MainFrame();
+
                 }
             }
 
-    
-         });
+        });
         
         //log out
         logButton.addActionListener(new ActionListener() {   
@@ -157,7 +160,9 @@ public class infoPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                  //close the current frame
-                    ((JFrame) SwingUtilities.getWindowAncestor(Bbutton)).dispose();
+                ((JFrame) SwingUtilities.getWindowAncestor(Bbutton)).dispose();
+                dHomePage dp = new dHomePage(user);
+                dp.showPage();
             }
 
     
