@@ -158,54 +158,28 @@ public class StudentInterface {
 
         return eventPanel; // Return the styled event panel
     }
-/*
-    // Method to create a line (divider) panel
-    public static JPanel createLine(int y) {
-        JPanel line = new JPanel();
-        line.setBackground(Color.BLACK); // Set line color
-        line.setBounds(0, y, 700, 1); // Set position and size
-        return line; // Return the line panel
-    }
-*/
 
     // Method to add checkboxes to the given panel
     public static void addCheckboxes(JPanel panel) {
-        // Create faculty checkboxes
-        Checkbox FEA = new Checkbox("Econ & Admin");
-        Checkbox Eng = new Checkbox("Engineering");
-        Checkbox FCIT = new Checkbox("Computing");
-        Checkbox Law = new Checkbox("Law");
-        Checkbox Science = new Checkbox("Science");
-
-        // Create label for faculty section
         JLabel label = new JLabel("Faculty:");
-        //new Font("Comic Sans", Font.PLAIN, 20)
         label.setFont(ColorsFonts.fontButton);
         label.setForeground(Color.WHITE);
-        label.setBounds(20, 150, 200, 50); // Set position and size
-
-        // Set bounds for each checkbox
-        FEA.setBounds(20, 200, 300, 30);
-        Eng.setBounds(20, 240, 300, 30);
-        FCIT.setBounds(20, 280, 300, 30);
-        Law.setBounds(20, 320, 300, 30);
-        Science.setBounds(20, 360, 300, 30);
-
-        // Set font and color for checkboxes
-        //new Font("Comic Sans", Font.PLAIN, 15)
-        Font checkboxFont = ColorsFonts.fontText;
-        FEA.setFont(checkboxFont); FEA.setForeground(Color.WHITE);
-        Eng.setFont(checkboxFont); Eng.setForeground(Color.WHITE);
-        FCIT.setFont(checkboxFont); FCIT.setForeground(Color.WHITE);
-        Law.setFont(checkboxFont); Law.setForeground(Color.WHITE);
-        Science.setFont(checkboxFont); Science.setForeground(Color.WHITE);
-
-        // Add components to the panel
+        label.setBounds(20, 100, 200, 50);
         panel.add(label);
-        panel.add(FEA);
-        panel.add(Eng);
-        panel.add(FCIT);
-        panel.add(Law);
-        panel.add(Science);
+
+        JCheckBox[] checkBoxes = new JCheckBox[6];
+        String[] labels = {"All Faculty", "Econ & Admin", "Engineering", "Computing", "Law", "Science"};
+        int yPosition = 150;
+
+        for (int i = 0; i < checkBoxes.length; i++) {
+            checkBoxes[i] = new JCheckBox(labels[i]);
+            checkBoxes[i].setFont(ColorsFonts.fontButton);
+            checkBoxes[i].setForeground(Color.WHITE);
+            checkBoxes[i].setBackground(ColorsFonts.midPurpule);
+            checkBoxes[i].setBounds(20, yPosition, 300, 50);
+            yPosition += 50;
+            panel.add(checkBoxes[i]);
+            checkBoxes[0].setSelected(true);
+        }
     }
 }
