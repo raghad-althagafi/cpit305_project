@@ -9,6 +9,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class Details {
     // Constructor for the Details class
@@ -83,8 +86,34 @@ public class Details {
         panel.setLayout(null); // Use null layout for manual positioning
         panel.setBounds(0, 0, 1000, 900); // Set position and size
         panel.setBackground(ColorsFonts.lightPurple); // Set panel background color
+        
+         //open in file button
+        JButton openFile = createStyledButton("Open in File");
+        openFile.setBounds(250, 450, 200, 50); // Set position and size of the button
+        
+        // Add action listener to the 'open in file' button
+        openFile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                PrintWriter out = new PrintWriter(new FileWriter(".\\Event.txt")); //write event information in a file
+                out.println("Event Name: ");// write detaila in file
+                out.println("Event Date: ");
+                out.println("Event Faculty: ");
+                out.println("Event Location: ");
+                out.println("Event Time: ");
+                out.println("Event Details: ");
+                out.close();//close 
+                }
+                catch(IOException ex){ //if exception occur
+                    System.out.println(ex.getMessage());
+                }
+            }
+        });
+
 
         // Add components to the panel
+        panel.add(openFile);
         panel.add(back);
         panel.add(events);
         panel.add(details1);
