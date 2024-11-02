@@ -31,9 +31,9 @@ public class Main {
 //        infoPage iPage = new infoPage(user);
 //        iPage.showPage();
         //Add event page
-//         ADDevent frameCreator = new ADDevent();
-//        JFrame frame = frameCreator.createFrame("Add Event");
-//        frame.setVisible(true);
+         ADDevent frameCreator = new ADDevent();
+        JFrame frame = frameCreator.createFrame("Add Event");
+        frame.setVisible(true);
  //      new Details();
 //        StudentInterface st = new StudentInterface(user);
         

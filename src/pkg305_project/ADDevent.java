@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,7 +34,15 @@ public class ADDevent {
     public JTextField collegeField;
     public JTextArea detailsArea;
     public static final Color Dgreen=new Color(5,125,114);
-    // Method to create the frame and add components
+    public Database dbManager;
+
+    public ADDevent() {
+        // Initialize DatabaseManager
+        dbManager = new Database();
+        dbManager.createTablesevent(); // Setup tables if they don't exist
+    }
+    
+// Method to create the frame and add components
     public JFrame createFrame(String title) {
         JFrame frame = new JFrame(title);
         frame.setSize(1000, 900);
@@ -131,6 +140,14 @@ public class ADDevent {
         addButton.setForeground(Color.WHITE);
         addButton.setBackground(ColorsFonts.darkPurple);
         frame.add(addButton);
+        
+        // Add event to database when button is clicked
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addEventToDatabase();
+            }
+        });
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -147,6 +164,18 @@ public class ADDevent {
             }
         });
         return frame; // Return the complete frame with components
+    }
+    public void addEventToDatabase() {
+        String eventName = eventNameField.getText();
+        String date = dateField.getText();
+        String time = timeField.getText();
+        String location = locationField.getText();
+        String college = collegeField.getText();
+        String details = detailsArea.getText();
+
+        // Use DatabaseManager to add the event to the database
+        dbManager.addEvent(eventName, date,time ,location,college, details);
+        JOptionPane.showMessageDialog(null, "The event has been added to the database!");
     }
     
     
