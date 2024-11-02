@@ -28,6 +28,7 @@ public class Login {
     public Login() {
         //create frame
         JFrame frame = new Frame("Login");
+        frame.setLocationRelativeTo(null); //set the frame location
         
         
         //create panel

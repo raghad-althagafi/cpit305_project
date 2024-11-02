@@ -28,6 +28,7 @@ public class Register {
         
         //create frame
         JFrame frame = new Frame("Register");
+        frame.setLocationRelativeTo(null); //set the frame location
         //create panel
         JPanel panel = new JPanel();
         //set background colot to gray

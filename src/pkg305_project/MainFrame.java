@@ -27,6 +27,8 @@ public class MainFrame {
         
         //create frame
         JFrame frame = new Frame("Main");
+        frame.setLocationRelativeTo(null); //set the frame location
+        
         //create panel
         JPanel panel = new JPanel();
         //set the background color
