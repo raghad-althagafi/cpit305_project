@@ -34,7 +34,7 @@ public class Main {
 //         ADDevent frameCreator = new ADDevent();
 //        JFrame frame = frameCreator.createFrame("Add Event");
 //        frame.setVisible(true);
-       new Details();
+ //      new Details();
 //        StudentInterface st = new StudentInterface(user);
         
         

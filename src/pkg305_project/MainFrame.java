@@ -76,6 +76,7 @@ public class MainFrame {
             public void actionPerformed(ActionEvent e) {
                 //open login frame
                 Login l = new Login();
+                frame.dispose(); //close the current frame
             }
         });
         

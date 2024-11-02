@@ -143,11 +143,13 @@ public class Register {
                 //Check if its Dr or student to open appropriate frame
                 if(emailInput.toLowerCase().contains("stu")){ //if student
                 new StudentInterface(user);
+                frame.dispose(); //close the current frame
                 }
                 
                  else{ //if its Dr
                     dHomePage dp = new dHomePage(user);
                     dp.showPage();
+                    frame.dispose(); //close the current frame
                  }
             }
         });
@@ -158,6 +160,7 @@ public class Register {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Login r = new Login();
+                frame.dispose(); //close the current frame
             }
         });
         

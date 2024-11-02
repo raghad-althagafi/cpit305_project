@@ -127,9 +127,12 @@ public class Login {
                 if (db.checkLogin(userInput, passInput) == true){
                     
                     if(db.checkRole(userInput)==true){ //if student
+                        frame.dispose(); //close the current frame
                         StudentInterface st = new StudentInterface(user);
+                        
                     }
                     else if(db.checkRole(userInput)==false){ //if Dr
+                        frame.dispose(); //close the current frame
                         dHomePage dp = new dHomePage(user);
                         dp.showPage();
                     }
@@ -143,6 +146,7 @@ public class Login {
             public void actionPerformed(ActionEvent e) {
                 //open register frame
                 Register r = new Register();
+                frame.dispose(); //close the current frame
             }
         });
         
@@ -151,7 +155,7 @@ public class Login {
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.dispose();
+                frame.dispose(); //close the current frame
             }
         });
         
