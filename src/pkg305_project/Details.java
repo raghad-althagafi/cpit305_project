@@ -14,27 +14,25 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class Details {
+    private Event event;
     // Constructor for the Details class
-    public Details() {
+    Details(Event event) {
+        this.event = event;
+    }
+    public void DetailPage() {
         // Create a JFrame for the details window
-        JFrame details = new JFrame("Details");
+        JFrame details = new JFrame("Event Details");
         details.setSize(800, 600); // Set size of the frame
         details.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close application on exit
         details.setBackground(ColorsFonts.lightPurple); // Set background color (not effective on JFrame)
+        details.setLocationRelativeTo(null);
 
-        // Create a 'Back' button
-        JButton back = createStyledButton("Back");
-        //(10, 25, 140, 40)
-        back.setBounds(20, 25, 160, 50); // Set position and size of the button
-
-        // Add action listener to the 'Back' button
-        back.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                details.dispose(); // Close the details frame when clicked
-            }
-        });
-
+        // Create a JPanel to hold all components
+        JPanel panel = new JPanel();
+        panel.setLayout(null); // Use null layout for manual positioning
+        panel.setBounds(0, 0, 1000, 900); // Set position and size
+        panel.setBackground(ColorsFonts.lightPurple); // Set panel background color
+        
         // Create a label for the event name
         JLabel events = new JLabel();
         events.setText("Event Name");
@@ -44,48 +42,6 @@ public class Details {
         events.setForeground(ColorsFonts.darkPurple); // Set text color
         events.setBounds(80, 100, 200, 100); // Set position and size of the label
 
-        // Create a label for event details (time)
-        JLabel details1 = new JLabel();
-        String day = "Sunday"; // Sample event time
-        details1.setText("Event Time: " + day);
-        details1.setVerticalAlignment(JLabel.CENTER);
-        details1.setHorizontalAlignment(JLabel.LEFT);
-        details1.setFont(ColorsFonts.fontText);
-        details1.setForeground(ColorsFonts.darkPurple);
-        details1.setBounds(100, 160, 700, 100); // Set position and size
-
-        // Create a JTextPane for additional text
-        JTextPane textArea = new JTextPane();
-        textArea.setText("Here is a lot of text...\n" +
-                "You can write as much as you want here.\n" +
-                "Feel free to add paragraphs, details, etc.\n" +
-                "This area supports scrolling if the text is long enough.\n" +
-                "You can customize this text however you like.\n\n" +
-                "End of text.");
-        textArea.setFont(ColorsFonts.fontText); // Set font style and size
-        textArea.setForeground(ColorsFonts.darkPurple); // Set text color
-        textArea.setBackground(ColorsFonts.lightPurple); // Set background color
-
-        // Create a JScrollPane to allow scrolling for the text area
-        JScrollPane scrollPane = new JScrollPane(textArea);
-        scrollPane.setBounds(100, 260, 530, 170); // Set position and size
-        scrollPane.setForeground(ColorsFonts.lightPurple);
-
-        // Create a label for faculty information
-        JLabel location = new JLabel();
-        String faculty = "Computing"; // Sample faculty name
-        location.setText("Faculty: " + faculty);
-        location.setVerticalAlignment(JLabel.CENTER);
-        location.setHorizontalAlignment(JLabel.LEFT);
-        location.setFont(ColorsFonts.fontText);
-        location.setForeground(ColorsFonts.darkPurple);
-        location.setBounds(100, 140, 700, 50); // Set position and size
-
-        // Create a JPanel to hold all components
-        JPanel panel = new JPanel();
-        panel.setLayout(null); // Use null layout for manual positioning
-        panel.setBounds(0, 0, 1000, 900); // Set position and size
-        panel.setBackground(ColorsFonts.lightPurple); // Set panel background color
         
          //open in file button
         JButton openFile = createStyledButton("Open in File");
@@ -114,11 +70,13 @@ public class Details {
 
         // Add components to the panel
         panel.add(openFile);
-        panel.add(back);
         panel.add(events);
-        panel.add(details1);
-        panel.add(location);
-        panel.add(scrollPane); // Add scroll pane for text area
+       addBackButton(details, panel);
+        addEventsName(panel);
+        addEventsFaculty(panel);
+        addEventsTime(panel);
+        addEventsLocation(panel);
+        addEventsDetails(panel);
 
         // Set layout for the details JFrame and add the panel
         details.setLayout(null);
@@ -136,5 +94,81 @@ public class Details {
         button.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15)); // Set button border
 
         return button; // Return the styled button
+    }
+    // Create a 'Back' button
+    private void addBackButton(JFrame details, JPanel panel){
+        JButton back = createStyledButton("Back");
+        back.setBounds(20, 25, 160, 50); // Set position and size of the button
+        // Add action listener to the 'Back' button
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                details.dispose(); // Close the details frame when clicked
+            }
+        });
+        panel.add(back);
+    }
+    
+    //Create a label for the faculty name
+    private void addEventsFaculty(JPanel panel){
+        JLabel facultyName = new JLabel("Faculty: " + event.getFaculty());
+        detailsLabel(facultyName,panel, 160);
+    }
+
+    //Create a label for the event time
+    private void addEventsTime(JPanel panel){
+        JLabel eventTime = new JLabel("Event Time: " + event.getEventDate() + ", " + event.getTime());
+        detailsLabel(eventTime,panel, 200);;
+    }
+
+    //Create a label for the event location
+    private void addEventsLocation(JPanel panel){
+        JLabel eventLocation = new JLabel("Event Location: " + event.getLocation());
+        detailsLabel(eventLocation, panel, 240);
+    }
+    
+    // Add a label for the event location
+    public void detailsLabel(JLabel label, JPanel panel,int y){
+        label.setVerticalAlignment(JLabel.CENTER);
+        label.setHorizontalAlignment(JLabel.LEFT);
+        label.setFont(ColorsFonts.fontText);
+        label.setForeground(ColorsFonts.darkPurple);
+        label.setBounds(100, y, 700, 40); // Set position and size
+        panel.add(label);
+    }
+    
+    // Create a label for the event name
+    private void addEventsName(JPanel panel){
+        JLabel eventsName = new JLabel("Event Name: " + event.getEventName());
+        eventsName.setVerticalAlignment(JLabel.TOP); // Align label to the top
+        eventsName.setHorizontalAlignment(JLabel.CENTER); // Center align text
+        eventsName.setFont(ColorsFonts.fontButton); // Set font style and size
+        eventsName.setForeground(ColorsFonts.darkPurple); // Set text color
+        eventsName.setBounds(80, 100, 200, 100); // Set position and size of the label
+        panel.add(eventsName);
+    }
+
+    // Create a JTextPane for additional text
+    public void addEventsDetails(JPanel panel){
+        JLabel eventLabel = new JLabel("Event Details: ");
+        detailsLabel(eventLabel, panel, 280);
+        JTextPane textArea = new JTextPane();
+        String text = event.getDetails();
+        //check if there is a detail for the event
+        if (text != null && !text.isEmpty()) {
+            textArea.setText(text);
+        } else {
+            textArea.setText("No details available."); // Fallback text
+        }
+        textArea.setFont(ColorsFonts.fontText); // Set font style and size
+        textArea.setForeground(ColorsFonts.darkPurple); // Set text color
+        textArea.setBackground(ColorsFonts.lightPurple); // Set background color
+        textArea.setEditable(false);
+        panel.add(textArea);
+        // Create a JScrollPane to allow scrolling for the text area
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setBounds(120, 320, 530, 200); // Set position and size
+        scrollPane.setForeground(ColorsFonts.lightPurple);
+        panel.add(scrollPane);
     }
 }

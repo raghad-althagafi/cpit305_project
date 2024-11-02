@@ -144,7 +144,7 @@ public class dHomePage {
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    new Details(); // Open details frame on button click
+                    //new Details(); // Open details frame on button click
                 }
             });
         }
