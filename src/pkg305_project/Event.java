@@ -7,16 +7,15 @@ import java.sql.Date;
  * @author shaha
  */
 public class Event {
-    private User user;
+    private String user;
     private String eventName;
-    private Date eventDate;
+    private String eventDate;
     private String Faculty;
     private String location;
     private String time;
     private String Details;
-    
 
-    public Event(User user, String name, Date eventDate, String Faculty, String location, String time, String Details) {
+    public Event(String name, String user, String eventDate, String time, String location, String Faculty, String Details) {
         this.user = user;
         this.eventName = name;
         this.eventDate = eventDate;
@@ -27,11 +26,31 @@ public class Event {
     }
 
     // Getter methods
-    public User getUser() { return user; }
-    public String getEventName() { return eventName; }
-    public Date getEventDate() { return eventDate; }
-    public String getFaculty() { return Faculty; }
-    public String getLocation() { return location; }
-    public String getTime() { return time; }
-    public String getDetails() { return Details; }
+    public String getUser() {
+        return user;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public String getEventDate() {
+        return eventDate;
+    }
+
+    public String getFaculty() {
+        return Faculty;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public String getDetails() {
+        return Details;
+    }
 }

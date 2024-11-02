@@ -212,6 +212,7 @@ public class Database {
         String createEventsTable = "CREATE TABLE IF NOT EXISTS events ("
                 + "eventID INT AUTO_INCREMENT PRIMARY KEY, "
                 + "eventName VARCHAR(255), "
+                + "publisherName VARCHAR(255), "
                 + "eventDate VARCHAR(255), "
                 + "eventTime VARCHAR(255), "
                 + "location VARCHAR(255), "
@@ -314,6 +315,6 @@ public class Database {
             return false;
         }
     }
-    
+     
 }
 
