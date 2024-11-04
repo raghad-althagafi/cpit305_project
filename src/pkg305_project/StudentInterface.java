@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import javax.swing.border.LineBorder;
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 
 /**
@@ -37,6 +39,7 @@ public class StudentInterface {
         studentFrame.setLayout(null); // Use null layout for manual positioning
         studentFrame.setSize(1000, 900); // Set frame size
         studentFrame.setVisible(true); // Make the frame visible
+        studentFrame.setLocationRelativeTo(null);
 
         // Right Panel Setup
         JPanel rightPanel = new JPanel();
@@ -75,14 +78,14 @@ public class StudentInterface {
     // Create the event panel
     private JPanel createEventPanel(Event event) {
         // Set the main panel
-        JPanel panel = new JPanel(new BorderLayout(15, 10)); // Create a panel with layout
+        JPanel panel = new JPanel(new BorderLayout(50, 3)); // Create a panel with layout
         panel.setBackground(ColorsFonts.lightPurple);
         panel.setBorder(new LineBorder(ColorsFonts.midPurpule, 1)); // Add border to the event panel
-        panel.setMaximumSize(new Dimension(640, 160)); // Set the max size for the panel
+        panel.setMaximumSize(new Dimension(640, 170)); // Set the max size for the panel
         panel.setPreferredSize(new Dimension(640, 150)); // Set the prefered size for the panel
 
         // Set panel for the one who publish the event
-        JPanel publisher = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 20));
+        JPanel publisher = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
         publisher.setOpaque(false); // Make the background visible
         JLabel publisherLabel = new JLabel("\uD83D\uDC64 " + event.getUser());
         publisherLabel.setFont(ColorsFonts.fontButton);
@@ -109,7 +112,9 @@ public class StudentInterface {
 
         //JLabel dateLabel = new JLabel(SDF.format(event.getEventDate()));
         // Set the remaining days for the events
-        JLabel remainLabel = new JLabel("remain days: " + remainingDays("2024-11-27") + " days");
+        String date =  event.getEventDate();
+        //System.out.println((event.getEventDate().compareTo("2024-11-5")));
+        JLabel remainLabel = new JLabel("remain days: " + remainingDays(date) + " days");
         remainLabel.setForeground(ColorsFonts.darkPurple);
         //dateLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
@@ -126,7 +131,8 @@ public class StudentInterface {
         detailsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //new Details(event); // Create Details page when pressing the button
+                Details details = new Details(event); // Create Details page when pressing the button
+                details.DetailPage();
             }
         });
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT)); //make the button in the right
@@ -143,10 +149,24 @@ public class StudentInterface {
 
     // calculate the remaining days for the event
     private int remainingDays(String stringdate) {
-        LocalDate date = LocalDate.parse(stringdate);
-        return (int) (ChronoUnit.DAYS.between(LocalDate.now(), date));
+        try {
+        LocalDate eventDate = LocalDate.parse(stringdate.trim());
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String date = eventDate.format(format);
+        LocalDate today = LocalDate.now();
+        long days = ChronoUnit.DAYS.between(today, eventDate);
+        
+        // If you want to show negative days for past events
+        return (int) days;
+        
+        // Or if you want to return 0 for past events
+        // return Math.max(0, (int) days);
+    } catch (DateTimeParseException e) {
+        System.out.println("Error parsing date: " + e);
+        return 0;  // or handle the error differently
     }
-
+    }
+    
     // Method to create a styled button
     public static JButton createStyledButton(String text) {
         JButton button = new JButton(text);
@@ -225,16 +245,20 @@ public class StudentInterface {
 
     public void readFromDatabase(Database db) {
         String query = "SELECT * FROM events";
-        try (Statement st = con.createStatement(); ResultSet rs = st.executeQuery(query)) {
+        String connectionURL = "jdbc:mysql://localhost:3306/KAUEvents";
+        try (Connection conn = DriverManager.getConnection(connectionURL, "root", "shahad");
+                Statement st = conn.createStatement(); 
+            ResultSet rs = st.executeQuery(query)) {
             while (rs.next()) {
                 // Assuming the events table
+                rs.getString("eventID");
                 Event event = new Event(
                         rs.getString("eventName"),
-                        rs.getString("publisherName"),
                         rs.getString("eventDate"),
                         rs.getString("eventTime"),
                         rs.getString("location"),
                         rs.getString("college"),
+                        rs.getString("publisher"),
                         rs.getString("details"));
 
                 // Add the event and check if it didn't end

@@ -209,7 +209,7 @@ public class Database {
     // Method to create tables in the database
     public void createTablesevent() {
         // SQL statement to create a table for events
-        String createEventsTable = "CREATE TABLE IF NOT EXISTS events ("
+        String createEventsTable = "CREATE TABLE IF NOT EXISTS event ("
                 + "eventID INT AUTO_INCREMENT PRIMARY KEY, "
                 + "eventName VARCHAR(255), "
                 + "eventDate VARCHAR(255), "
@@ -230,7 +230,7 @@ public class Database {
     
     // Method to add event to the database
     public void addEvent(String eventName, String date, String time, String location, String college, String publisher, String details) {
-        String insertEventSQL = "INSERT INTO events (eventName, eventDate, eventTime, location, college, publisher, details) VALUES (?, ?, ?, ?, ?, ?)";
+        String insertEventSQL = "INSERT INTO event (eventName, eventDate, eventTime, location, college, publisher, details) VALUES (?, ?, ?, ?, ?, ?, ?)";
         
         try (PreparedStatement pstmt = con.prepareStatement(insertEventSQL)) {
             pstmt.setString(1, eventName);
@@ -316,6 +316,18 @@ public class Database {
             return false;
         }
     }
-     
+ 
+     public void addSampleEvents(){
+    String query = "INSERT INTO events "
+            + "(eventName, eventDate, eventTime, location, college, publisher, details) VALUES"
+            + "('Games Day', '2024-11-05', '11am', 'FCIT lounge', 'FCIT', 'Sara' ,'visit us'),"
+            + "('G Day', '2024-11-05', '11am', 'FCIT lounge', 'FCIT', 'Shahad', 'visit')";
+    try (PreparedStatement st = con.prepareStatement(query)) {
+        st.executeUpdate(query);
+
+    } catch (SQLException s) {
+        System.out.println("Failed to update events: " + s.getMessage());
+    }
+}
 }
 
