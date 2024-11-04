@@ -28,7 +28,7 @@ public class StudentInterface {
     public StudentInterface(User user) {
         this.user = user;
         // Initialize DatabaseManager
-        db = new Database();
+        db = user.getDb();
         db.createTablesevent(); // Setup tables if they don't exist
 
         // Set up the main frame for the student interface

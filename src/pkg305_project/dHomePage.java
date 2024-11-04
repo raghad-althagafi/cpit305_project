@@ -113,8 +113,8 @@ public class dHomePage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Doctor.dispose();
-                infoPage iPage = new infoPage(user);
-                iPage.showPage();
+//                infoPage iPage = new infoPage(user);
+//                iPage.showPage();
 
             }
         });

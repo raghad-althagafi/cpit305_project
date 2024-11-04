@@ -161,8 +161,8 @@ public class infoPage {
             public void actionPerformed(ActionEvent e) {
                  //close the current frame
                 ((JFrame) SwingUtilities.getWindowAncestor(Bbutton)).dispose();
-                dHomePage dp = new dHomePage(user);
-                dp.showPage();
+//                dHomePage dp = new dHomePage(user);
+//                dp.showPage();
             }
 
     
