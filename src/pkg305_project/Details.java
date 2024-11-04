@@ -44,32 +44,32 @@ public class Details {
 
         
          //open in file button
-        JButton openFile = createStyledButton("Open in File");
-        openFile.setBounds(250, 450, 200, 50); // Set position and size of the button
+//        JButton openFile = createStyledButton("Open in File");
+//        openFile.setBounds(250, 450, 200, 50); // Set position and size of the button
         
         // Add action listener to the 'open in file' button
-        openFile.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try{
-                PrintWriter out = new PrintWriter(new FileWriter(".\\Event.txt")); //write event information in a file
-                out.println("Event Name: ");// write detaila in file
-                out.println("Event Date: ");
-                out.println("Event Faculty: ");
-                out.println("Event Location: ");
-                out.println("Event Time: ");
-                out.println("Event Details: ");
-                out.close();//close 
-                }
-                catch(IOException ex){ //if exception occur
-                    System.out.println(ex.getMessage());
-                }
-            }
-        });
+//        openFile.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                try{
+//                PrintWriter out = new PrintWriter(new FileWriter(".\\Event.txt")); //write event information in a file
+//                out.println("Event Name: ");// write detaila in file
+//                out.println("Event Date: ");
+//                out.println("Event Faculty: ");
+//                out.println("Event Location: ");
+//                out.println("Event Time: ");
+//                out.println("Event Details: ");
+//                out.close();//close 
+//                }
+//                catch(IOException ex){ //if exception occur
+//                    System.out.println(ex.getMessage());
+//                }
+//            }
+//        });
 
 
         // Add components to the panel
-        panel.add(openFile);
+        //panel.add(openFile);
         panel.add(events);
        addBackButton(details, panel);
         addEventsName(panel);
