@@ -316,6 +316,18 @@ public class Database {
             return false;
         }
     }
-     
+ 
+     public void addSampleEvents(){
+    String query = "INSERT INTO events "
+            + "(eventName, eventDate, eventTime, location, college, publisher, details) VALUES"
+            + "('Games Day', '2024-11-05', '11am', 'FCIT lounge', 'FCIT', 'Sara' ,'visit us'),"
+            + "('G Day', '2024-11-05', '11am', 'FCIT lounge', 'FCIT', 'Shahad', 'visit')";
+    try (PreparedStatement st = con.prepareStatement(query)) {
+        st.executeUpdate(query);
+
+    } catch (SQLException s) {
+        System.out.println("Failed to update events: " + s.getMessage());
+    }
+}
 }
 

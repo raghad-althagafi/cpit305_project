@@ -6,8 +6,8 @@
 package pkg305_project;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
+        import java.awt.*;
+        import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -32,46 +32,35 @@ public class Details {
         panel.setLayout(null); // Use null layout for manual positioning
         panel.setBounds(0, 0, 1000, 900); // Set position and size
         panel.setBackground(ColorsFonts.lightPurple); // Set panel background color
-        
-        // Create a label for the event name
-        JLabel events = new JLabel();
-        events.setText("Event Name");
-        events.setVerticalAlignment(JLabel.TOP); // Align label to the top
-        events.setHorizontalAlignment(JLabel.CENTER); // Center align text
-        events.setFont(ColorsFonts.fontButton); // Set font style and size
-        events.setForeground(ColorsFonts.darkPurple); // Set text color
-        events.setBounds(80, 100, 200, 100); // Set position and size of the label
 
-        
-         //open in file button
+        //open in file button
 //        JButton openFile = createStyledButton("Open in File");
 //        openFile.setBounds(250, 450, 200, 50); // Set position and size of the button
-        
-        // Add action listener to the 'open in file' button
+//
+//        // Add action listener to the 'open in file' button
 //        openFile.addActionListener(new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent e) {
 //                try{
-//                PrintWriter out = new PrintWriter(new FileWriter(".\\Event.txt")); //write event information in a file
-//                out.println("Event Name: ");// write detaila in file
-//                out.println("Event Date: ");
-//                out.println("Event Faculty: ");
-//                out.println("Event Location: ");
-//                out.println("Event Time: ");
-//                out.println("Event Details: ");
-//                out.close();//close 
+//                    PrintWriter out = new PrintWriter(new FileWriter(".\\Event.txt")); //write event information in a file
+//                    out.println("Event Name: ");// write detaila in file
+//                    out.println("Event Date: ");
+//                    out.println("Event Faculty: ");
+//                    out.println("Event Location: ");
+//                    out.println("Event Time: ");
+//                    out.println("Event Details: ");
+//                    out.close();//close
 //                }
 //                catch(IOException ex){ //if exception occur
 //                    System.out.println(ex.getMessage());
 //                }
 //            }
 //        });
-
-
-        // Add components to the panel
-        //panel.add(openFile);
-        panel.add(events);
-       addBackButton(details, panel);
+//
+//
+//        // Add components to the panel
+//        panel.add(openFile);
+        addBackButton(details, panel);
         addEventsName(panel);
         addEventsFaculty(panel);
         addEventsTime(panel);
@@ -108,7 +97,7 @@ public class Details {
         });
         panel.add(back);
     }
-    
+
     //Create a label for the faculty name
     private void addEventsFaculty(JPanel panel){
         JLabel facultyName = new JLabel("Faculty: " + event.getFaculty());
@@ -126,7 +115,7 @@ public class Details {
         JLabel eventLocation = new JLabel("Event Location: " + event.getLocation());
         detailsLabel(eventLocation, panel, 240);
     }
-    
+
     // Add a label for the event location
     public void detailsLabel(JLabel label, JPanel panel,int y){
         label.setVerticalAlignment(JLabel.CENTER);
@@ -136,15 +125,15 @@ public class Details {
         label.setBounds(100, y, 700, 40); // Set position and size
         panel.add(label);
     }
-    
+
     // Create a label for the event name
     private void addEventsName(JPanel panel){
         JLabel eventsName = new JLabel("Event Name: " + event.getEventName());
         eventsName.setVerticalAlignment(JLabel.TOP); // Align label to the top
-        eventsName.setHorizontalAlignment(JLabel.CENTER); // Center align text
+        eventsName.setHorizontalAlignment(JLabel.LEFT); // Center align text
         eventsName.setFont(ColorsFonts.fontButton); // Set font style and size
         eventsName.setForeground(ColorsFonts.darkPurple); // Set text color
-        eventsName.setBounds(80, 100, 200, 100); // Set position and size of the label
+        eventsName.setBounds(80, 100, 530, 100); // Set position and size of the label
         panel.add(eventsName);
     }
 

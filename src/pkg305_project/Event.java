@@ -15,7 +15,7 @@ public class Event {
     private String time;
     private String Details;
 
-    public Event(String name, String user, String eventDate, String time, String location, String Faculty, String Details) {
+    public Event(String name, String eventDate, String time, String location, String Faculty, String user, String Details) {
         this.user = user;
         this.eventName = name;
         this.eventDate = eventDate;
