@@ -212,11 +212,11 @@ public class Database {
         String createEventsTable = "CREATE TABLE IF NOT EXISTS events ("
                 + "eventID INT AUTO_INCREMENT PRIMARY KEY, "
                 + "eventName VARCHAR(255), "
-                + "publisherName VARCHAR(255), "
                 + "eventDate VARCHAR(255), "
                 + "eventTime VARCHAR(255), "
                 + "location VARCHAR(255), "
                 + "college VARCHAR(255), "
+                + "publisher VARCHAR(255), "
                 + "details TEXT"
                 + ")";
         
@@ -229,8 +229,8 @@ public class Database {
     }
     
     // Method to add event to the database
-    public void addEvent(String eventName, String date, String time, String location, String college, String details) {
-        String insertEventSQL = "INSERT INTO events (eventName, eventDate, eventTime, location, college, details) VALUES (?, ?, ?, ?, ?, ?)";
+    public void addEvent(String eventName, String date, String time, String location, String college, String publisher, String details) {
+        String insertEventSQL = "INSERT INTO events (eventName, eventDate, eventTime, location, college, publisher, details) VALUES (?, ?, ?, ?, ?, ?)";
         
         try (PreparedStatement pstmt = con.prepareStatement(insertEventSQL)) {
             pstmt.setString(1, eventName);
@@ -238,7 +238,8 @@ public class Database {
             pstmt.setString(3, time);
             pstmt.setString(4, location);
             pstmt.setString(5, college);
-            pstmt.setString(6, details);
+            pstmt.setString(6,publisher );
+            pstmt.setString(7, details);
 
             pstmt.executeUpdate();
             System.out.println("Event added successfully!");

@@ -32,6 +32,7 @@ public class ADDevent {
     public JTextField timeField;
     public JTextField locationField;
     public JTextField collegeField;
+     public JTextField publisherField;
     public JTextArea detailsArea;
     public static final Color Dgreen=new Color(5,125,114);
     public Database dbManager;
@@ -121,6 +122,17 @@ public class ADDevent {
         collegeField = new JTextField();
         collegeField.setBounds(290, 300,  330, 40);
         frame.add(collegeField);
+        
+        // Create and add label and text field for publisher name
+        JLabel publishereLabel = new JLabel("publisher:");
+        publishereLabel.setFont(ColorsFonts.fontText);
+        publishereLabel.setForeground(ColorsFonts.darkPurple);
+        publishereLabel.setBounds(140, 350, 150, 30);
+        frame.add(publishereLabel);
+
+        publisherField = new JTextField();
+        publisherField.setBounds(290, 350,  330, 40);
+        frame.add(publisherField);
 
         // Create and add label and text area for Details
         JLabel detailsLabel = new JLabel("Details:");
@@ -172,9 +184,10 @@ public class ADDevent {
         String location = locationField.getText();
         String college = collegeField.getText();
         String details = detailsArea.getText();
+        String publisher=publisherField.getText();
 
         // Use DatabaseManager to add the event to the database
-        dbManager.addEvent(eventName, date,time ,location,college, details);
+        dbManager.addEvent(eventName, date,time ,location,college,publisher, details);
         JOptionPane.showMessageDialog(null, "The event has been added to the database!");
     }
     
