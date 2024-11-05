@@ -36,8 +36,10 @@ public class ADDevent {
     public JTextArea detailsArea;
     public static final Color Dgreen=new Color(5,125,114);
     public Database dbManager;
+    private User user;
 
-    public ADDevent() {
+    public ADDevent(User user) {
+        this.user = user;
         // Initialize DatabaseManager
         dbManager = new Database();
         dbManager.createTablesevent(); // Setup tables if they don't exist
@@ -184,7 +186,8 @@ public class ADDevent {
         String location = locationField.getText();
         String college = collegeField.getText();
         String details = detailsArea.getText();
-        String publisher=publisherField.getText();
+        //String publisher=publisherField.getText();
+        String publisher=user.getUsername();
 
         // Use DatabaseManager to add the event to the database
         dbManager.addEvent(eventName, date,time ,location,college,publisher, details);

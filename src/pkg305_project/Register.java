@@ -148,7 +148,7 @@ public class Register {
                 }
                 
                  else{ //if its Dr
-                    dHomePage dp = new dHomePage(user);
+                    doctorInterface dp = new doctorInterface(user);
                     dp.showPage();
                     frame.dispose(); //close the current frame
                  }

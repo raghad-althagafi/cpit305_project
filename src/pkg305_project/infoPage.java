@@ -110,7 +110,7 @@ public class infoPage {
                 if(updated){
                 JOptionPane.showMessageDialog(f, "Your information has been successfully updated.", "Profile update", JOptionPane.PLAIN_MESSAGE);
                 //update user's name in user class
-                user.setUsername(nameTF.getText());
+                user.setEverything(nameTF.getText(),  EmailTF.getText(), PasswordTF.getText());
                 
                 }
                 else{

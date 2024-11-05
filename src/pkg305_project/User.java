@@ -24,6 +24,12 @@ public class User {
 
     }
 
+    public void setEverything(String Username, String email,String password){
+        this.Username = Username;
+        this.email = email;
+        this.password = password;
+    }
+    
     public String getUsername() {
         return db.findUserInformation(Username)[2];
     }
@@ -51,7 +57,9 @@ public class User {
         this.db = db;
     }
    
-   
+    public boolean Role(){
+        return db.checkRole(Username);
+    }
    
    
 }

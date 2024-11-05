@@ -15,13 +15,12 @@ import javax.swing.border.LineBorder;
  *
  * @author AHC
  */
-public class dHomePage {
+public class doctorInterface extends userInterface{
 
-    private User user;
+   // private User user;
 
-    public dHomePage(User user) {
-        this.user = user;
-
+    public doctorInterface(User user) {
+super(user);
     }
 
     public void showPage() {
@@ -38,17 +37,7 @@ public class dHomePage {
         events.setBounds(200, 20, 300, 100);
 
         //create the events
-        JPanel E1 = createStyledPanel(name, EventName, EventStart, 150, true);// If true, it means that the user of this account is the one who wrote the event information
 
-        //JPanel line = lines(302);
-        JPanel E2 = createStyledPanel("shahad", EventName, EventStart, 305, false);
-        //JPanel line2 = lines(457);
-
-        JPanel E3 = createStyledPanel("shahad", EventName, EventStart, 460, false);
-        // JPanel line3 = lines(612);
-
-        JPanel E4 = createStyledPanel(name, EventName, EventStart, 615, true);
-        //JPanel line4 = lines(765);
 
         //create the left panel
         JPanel panel = new JPanel();
@@ -74,14 +63,10 @@ public class dHomePage {
 
         panel2.add(addEventButton);
         panel2.add(events);
-        panel2.add(E1);
 
         //panel2.add(line);
-        panel2.add(E2);
         //panel2.add(line2);
-        panel2.add(E3);
         //panel2.add(line3);
-        panel2.add(E4);
         //panel2.add(line4);
 
         //add the components to the left panel
@@ -102,7 +87,7 @@ public class dHomePage {
         addEventButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ADDevent frameCreator = new ADDevent();
+                ADDevent frameCreator = new ADDevent(user);
                 JFrame frame = frameCreator.createFrame("Add Event");
                 frame.setVisible(true);
             }
@@ -112,9 +97,9 @@ public class dHomePage {
         userButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Doctor.dispose();
-//                infoPage iPage = new infoPage(user);
-//                iPage.showPage();
+                //Doctor.dispose();
+                infoPage iPage = new infoPage(user);
+                iPage.showPage();
 
             }
         });
@@ -224,46 +209,27 @@ public class dHomePage {
     }
 
     public static void addCheckboxes(JPanel panel) {
-        // Create faculty checkboxes
-        Checkbox FEA = new Checkbox("Economics and Administration");
-        Checkbox Eng = new Checkbox("Engineering");
-        Checkbox FCIT = new Checkbox("Computing and Information Technology");
-        Checkbox Law = new Checkbox("Law");
-        Checkbox Science = new Checkbox("Science");
-
-        // Create label for faculty section
+        // Add the label for the checkboxes
         JLabel label = new JLabel("Faculty:");
-        label.setFont(ColorsFonts.fontText);
+        label.setFont(ColorsFonts.fontButton);
         label.setForeground(Color.WHITE);
-        label.setBounds(20, 150, 200, 50); // Set position and size
-
-        // Set bounds for each checkbox
-        FEA.setBounds(20, 200, 300, 30);
-        Eng.setBounds(20, 240, 300, 30);
-        FCIT.setBounds(20, 280, 300, 30);
-        Law.setBounds(20, 320, 300, 30);
-        Science.setBounds(20, 360, 300, 30);
-
-        // Set font and color for checkboxes
-        Font checkboxFont = new Font("Comic Sans", Font.PLAIN, 15);
-        FEA.setFont(checkboxFont);
-        FEA.setForeground(Color.WHITE);
-        Eng.setFont(checkboxFont);
-        Eng.setForeground(Color.WHITE);
-        FCIT.setFont(checkboxFont);
-        FCIT.setForeground(Color.WHITE);
-        Law.setFont(checkboxFont);
-        Law.setForeground(Color.WHITE);
-        Science.setFont(checkboxFont);
-        Science.setForeground(Color.WHITE);
-
-        // Add components to the panel
+        label.setBounds(20, 100, 200, 50);
         panel.add(label);
-        panel.add(FEA);
-        panel.add(Eng);
-        panel.add(FCIT);
-        panel.add(Law);
-        panel.add(Science);
+
+        // Create checkboxes
+        JCheckBox[] checkBoxes = new JCheckBox[6];
+        String[] labels = {"All Faculty", "Econ & Admin", "Engineering", "Computing", "Law", "Science"};
+        int yPosition = 150;
+
+        for (int i = 0; i < checkBoxes.length; i++) {
+            checkBoxes[i] = new JCheckBox(labels[i]);
+            checkBoxes[i].setFont(ColorsFonts.fontButton);
+            checkBoxes[i].setForeground(Color.WHITE);
+            checkBoxes[i].setBackground(ColorsFonts.midPurpule);
+            checkBoxes[i].setBounds(20, yPosition, 300, 50);
+            yPosition += 50;
+            panel.add(checkBoxes[i]);
+        }
     }
 
     public static JPanel lines(int y) {

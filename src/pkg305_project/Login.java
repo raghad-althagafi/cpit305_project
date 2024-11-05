@@ -127,16 +127,16 @@ public class Login {
                 //check user login
                 if (db.checkLogin(userInput, passInput) == true){
                     
-                    if(db.checkRole(userInput)==true){ //if student
+//                    if(db.checkRole(userInput)==true){ //if student
                         frame.dispose(); //close the current frame
-                        StudentInterface st = new StudentInterface(user);
-                        
-                    }
-                    else if(db.checkRole(userInput)==false){ //if Dr
-                        frame.dispose(); //close the current frame
-                        dHomePage dp = new dHomePage(user);
-                        dp.showPage();
-                    }
+//                        StudentInterface st = new StudentInterface(user);
+                         userInterface userinterface = new StudentInterface(user);
+//                    }
+//                    else if(db.checkRole(userInput)==false){ //if Dr
+//                        frame.dispose(); //close the current frame
+//                        doctorInterface dp = new doctorInterface(user);
+//                        //dp.showPage();
+//                    }
                 }
             }
         });
