@@ -149,7 +149,7 @@ public class Register {
                 
                  else{ //if its Dr
                     doctorInterface dp = new doctorInterface(user);
-                    dp.showPage();
+//                    dp.showPage();
                     frame.dispose(); //close the current frame
                  }
             }

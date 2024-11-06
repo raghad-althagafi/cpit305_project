@@ -18,6 +18,8 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -29,6 +31,7 @@ public class userInterface {
     protected JPanel eventListPanel;
     protected Database db;
     protected Connection con;
+    private JCheckBox[] checkBoxes; // Array to hold faculty checkboxes
 
     public userInterface(User user) {
         this.user = user;
@@ -46,66 +49,66 @@ public class userInterface {
        }
        else{
             userFrame = new JFrame("Doctor");
-       }
- userFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    userFrame.setLayout(null);
-    userFrame.setSize(1000, 900);
-    userFrame.setLocationRelativeTo(null);
+        }
+        userFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        userFrame.setLayout(null);
+        userFrame.setSize(1000, 900);
+        userFrame.setLocationRelativeTo(null);
 
-    // Right Panel Setup
-    JPanel rightPanel = new JPanel();
-    rightPanel.setBackground(ColorsFonts.lightPurple);
-    rightPanel.setBounds(300, 0, 700, 900);
-    rightPanel.setLayout(null);
+        // Right Panel Setup
+        JPanel rightPanel = new JPanel();
+        rightPanel.setBackground(ColorsFonts.lightPurple);
+        rightPanel.setBounds(300, 0, 700, 900);
+        rightPanel.setLayout(null);
 
-    // Title Label
-    JLabel eventsLabel = new JLabel("KAU EVENTS");
-    eventsLabel.setFont(ColorsFonts.fontTitle);
-    eventsLabel.setForeground(ColorsFonts.darkPurple);
-    eventsLabel.setBounds(200, 20, 300, 50); // Adjusted size for better layout
-    rightPanel.add(eventsLabel);
+        // Title Label
+        JLabel eventsLabel = new JLabel("KAU EVENTS");
+        eventsLabel.setFont(ColorsFonts.fontTitle);
+        eventsLabel.setForeground(ColorsFonts.darkPurple);
+        eventsLabel.setBounds(200, 20, 300, 50); // Adjusted size for better layout
+        rightPanel.add(eventsLabel);
 
-    // "Add new Event" Button (only if user is not a student)
-    if (!user.Role()) {
-        JButton addEventButton = createStyledButton("Add new Event");
-        addEventButton.setFont(ColorsFonts.fontButton);
-        addEventButton.setBounds(100, 75, 500, 70); // Increased size and adjusted position
-        rightPanel.add(addEventButton);
-       
-        //If the addEvent button is clicked
-        addEventButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ADDevent frameCreator = new ADDevent(user);
-                JFrame frame = frameCreator.createFrame("Add Event");
-                frame.setVisible(true);
-            }
-        });
-    }
+        // "Add new Event" Button (only if user is not a student)
+        if (!user.Role()) {
+            JButton addEventButton = createStyledButton("Add new Event");
+            addEventButton.setFont(ColorsFonts.fontButton);
+            addEventButton.setBounds(100, 75, 500, 70);
+            rightPanel.add(addEventButton);
 
-    // Event List Panel with ScrollPane
-    eventListPanel = new JPanel();
-    eventListPanel.setLayout(new BoxLayout(eventListPanel, BoxLayout.Y_AXIS));
-    eventListPanel.setBackground(ColorsFonts.lightPurple);
+            //If the addEvent button is clicked
+            addEventButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    ADDevent frameCreator = new ADDevent(user);
+                    JFrame frame = frameCreator.createFrame("Add Event");
+                    frame.setVisible(true);
+                }
+            });
+        }
 
-    // ScrollPane for the Event List, positioned below the "Add new Event" button
-    JScrollPane scrollPane = new JScrollPane(eventListPanel);
-    scrollPane.setBounds(10, 150, 660, 700); // Positioned to leave space for title and button
-    scrollPane.getVerticalScrollBar().setUnitIncrement(10);
-    rightPanel.add(scrollPane);
+        // Event List Panel with ScrollPane
+        eventListPanel = new JPanel();
+        eventListPanel.setLayout(new BoxLayout(eventListPanel, BoxLayout.Y_AXIS));
+        eventListPanel.setBackground(ColorsFonts.lightPurple);
 
-    // Add the right panel to the main frame
-    userFrame.add(rightPanel);
+        // ScrollPane for the Event List, positioned below the "Add new Event" button
+        JScrollPane scrollPane = new JScrollPane(eventListPanel);
+        scrollPane.setBounds(10, 150, 660, 700); // Positioned to leave space for title and button
+        scrollPane.getVerticalScrollBar().setUnitIncrement(10);
+        rightPanel.add(scrollPane);
 
-    // Left Panel
-    addLeftPanel(userFrame);
+        // Add the right panel to the main frame
+        userFrame.add(rightPanel);
 
-    // Refresh and make visible
-    userFrame.revalidate();
-    userFrame.repaint();
-    userFrame.setVisible(true);
+        // Left Panel
+        addLeftPanel(userFrame);
 
-    readFromDatabase(db);
+        // Refresh and make visible
+        userFrame.revalidate();
+        userFrame.repaint();
+        userFrame.setVisible(true);
+        
+        readFromDatabase(db);
 }
     
         // Create the event panel
@@ -176,36 +179,35 @@ public class userInterface {
         
         
         if (ispublisher) {
-               // Add the Delete button only if the user is the publisher
-    JButton delete = createStyledButton("Delete");
-    delete.setPreferredSize(new Dimension(100, 40)); // Set preferred size for delete button
+            // Add the Delete button only if the user is the publisher
+            JButton delete = createStyledButton("Delete");
+            delete.setPreferredSize(new Dimension(100, 40)); // Set preferred size for delete button
 
-    delete.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String[] options = {"Delete", "No"};
-            int choice = JOptionPane.showOptionDialog(
-                    null,
-                    "Are you sure?",
-                    "Confirmation",
-                    JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.WARNING_MESSAGE,
-                    null,
-                    options,
-                    options[1]
-            );
+            delete.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String[] options = {"Delete", "No"};
+                    int choice = JOptionPane.showOptionDialog(
+                            null,
+                            "Are you sure?",
+                            "Confirmation",
+                            JOptionPane.DEFAULT_OPTION,
+                            JOptionPane.WARNING_MESSAGE,
+                            null,
+                            options,
+                            options[1]
+                    );
 
-            if (choice == 0) {
-                //System.out.println("Item deleted");
-            } else {
-                //System.out.println("Deletion canceled");
-            }
-        }
-    });
+                    if (choice == 0) {
+                        //System.out.println("Item deleted");
+                    } else {
+                        //System.out.println("Deletion canceled");
+                    }
+                }
+            });
             buttonPanel.add(detailsButton);
-            buttonPanel.add(delete); // Add the Delete button to the panel
-        }
-        else{
+            buttonPanel.add(delete); 
+        } else {
             buttonPanel.add(detailsButton);
         }
 
@@ -293,18 +295,14 @@ public class userInterface {
     
     
     
-    
-    
-        public static void addCheckboxes(JPanel panel) {
-        // Add the label for the checkboxes
+        public void addCheckboxes(JPanel panel) {
         JLabel label = new JLabel("Faculty:");
         label.setFont(ColorsFonts.fontButton);
         label.setForeground(Color.WHITE);
         label.setBounds(20, 100, 200, 50);
         panel.add(label);
 
-        // Create checkboxes
-        JCheckBox[] checkBoxes = new JCheckBox[6];
+        checkBoxes = new JCheckBox[6];
         String[] labels = {"All Faculty", "Econ & Admin", "Engineering", "Computing", "Law", "Science"};
         int yPosition = 150;
 
@@ -316,43 +314,91 @@ public class userInterface {
             checkBoxes[i].setBounds(20, yPosition, 300, 50);
             yPosition += 50;
             panel.add(checkBoxes[i]);
+
+            // Add an ActionListener for each checkbox
+            checkBoxes[i].addItemListener(new ItemListener() {
+                @Override
+                public void itemStateChanged(ItemEvent e) {
+                    // Refresh the event list whenever the selection changes
+                    readFromDatabase(db);
+                }
+            });
         }
     }
-        
-            public void readFromDatabase(Database db) {
-        String query = "SELECT * FROM event";
-        String connectionURL = "jdbc:mysql://localhost:3306/KAUEvents";
-        try (Connection conn = DriverManager.getConnection(connectionURL, "root", "raghad");
-                Statement st = conn.createStatement(); 
-            ResultSet rs = st.executeQuery(query)) {
-            while (rs.next()) {
-                // Assuming the events table
-                rs.getString("eventID");
-                Event event = new Event(
-                        rs.getString("eventName"),
-                        rs.getString("eventDate"),
-                        rs.getString("eventTime"),
-                        rs.getString("location"),
-                        rs.getString("college"),
-                        rs.getString("publisher"),
-                        rs.getString("details"));
-                // Add the event and check if it didn't end
-                if (remainingDays(event.getEventDate()) >= 0) {
-                    //is this user the publisher and not a student
-                    if(user.getUsername().equalsIgnoreCase(event.getUser()) && !user.Role()){
-                        eventListPanel.add(createEventPanel(event,true));
-                        eventListPanel.add(Box.createRigidArea(new Dimension(0, 15)));
-                    }else{
-                    eventListPanel.add(createEventPanel(event,false));
-                    eventListPanel.add(Box.createRigidArea(new Dimension(0, 15)));
-                    }
+
+          public List<String> getSelectedFaculties() {
+        List<String> selectedFaculties = new ArrayList<>();
+
+        // Check if "All Faculty" is selected
+        if (checkBoxes[0].isSelected()) {
+            selectedFaculties.add("All");
+        } else {
+            // Add only individually selected faculties
+            for (int i = 1; i < checkBoxes.length; i++) {
+                if (checkBoxes[i].isSelected()) {
+                    selectedFaculties.add(checkBoxes[i].getText());
                 }
             }
-        } catch (SQLException s) {
-            System.out.println("SQL statement for retrieving users is not executed!");
-            s.printStackTrace();
+        }
+
+        // Return null if nothing is selected
+        if (selectedFaculties.isEmpty()) {
+            return null;
+        } else {
+            return selectedFaculties;
         }
     }
+           
+        
+        
+            public void readFromDatabase(Database db) {
+         eventListPanel.removeAll(); // Clear previous event panels
+    List<String> selectedFaculties = getSelectedFaculties(); // Get selected faculties
+
+    String query = "SELECT * FROM event";
+    // Check if specific faculties are selected
+    if (selectedFaculties != null && !selectedFaculties.contains("All")) {
+        // Build a WHERE clause to filter events by selected faculties
+        StringBuilder filter = new StringBuilder(" WHERE college IN (");
+        for (int i = 0; i < selectedFaculties.size(); i++) {
+            filter.append("'").append(selectedFaculties.get(i)).append("'");
+            if (i < selectedFaculties.size() - 1) filter.append(", ");
+        }
+        filter.append(")");
+        query += filter.toString(); // Append the filter to the query
+    }
+
+    // Execute the query and display events
+    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/KAUEvents", "root", "raghad");
+         Statement stmt = conn.createStatement();
+         ResultSet rs = stmt.executeQuery(query)) {
+
+        while (rs.next()) {
+            rs.getString("eventID");
+            Event event = new Event(
+                    rs.getString("eventName"),
+                    rs.getString("eventDate"),
+                    rs.getString("eventTime"),
+                    rs.getString("location"),
+                    rs.getString("college"),
+                    rs.getString("publisher"),
+                    rs.getString("details"));
+
+            if (remainingDays(event.getEventDate()) >= 0) {
+                boolean isPublisher = user.getUsername().equalsIgnoreCase(event.getUser()) && !user.Role();
+                eventListPanel.add(createEventPanel(event, isPublisher));
+                eventListPanel.add(Box.createRigidArea(new Dimension(0, 15)));
+            }
+        }
+    } catch (SQLException s) {
+        System.out.println("SQL statement for retrieving events is not executed!");
+        s.printStackTrace();
+    }
+
+    // Refresh the display after adding new events
+    eventListPanel.revalidate();
+    eventListPanel.repaint();
+}
 
 
 }
