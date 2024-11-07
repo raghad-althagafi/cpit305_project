@@ -168,6 +168,10 @@ public class userInterface {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Details details = new Details(event); // Create Details page when pressing the button
+                
+                PrintThread thread1 = new PrintThread(event); //thread to print event info in file
+                thread1.start();
+                
                 details.DetailPage();
             }
             
@@ -369,7 +373,7 @@ public class userInterface {
     }
 
     // Execute the query and display events
-    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/KAUEvents", "root", "raghad");
+    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/KAUEvents", "root", "Leena1234");
          Statement stmt = conn.createStatement();
          ResultSet rs = stmt.executeQuery(query)) {
 

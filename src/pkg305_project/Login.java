@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -115,6 +116,12 @@ public class Login {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
+                if (userText.getText().trim().isEmpty() ||
+                String.valueOf(passText.getPassword()).trim().isEmpty()) { //if user leave some fields empty
+    
+                 JOptionPane.showMessageDialog(frame, "Please fill all fields", "Input Error", JOptionPane.ERROR_MESSAGE);
+            }
+                else{
                 //create DB object 
                 Database db = new Database();
                 //convert user inputs to text
@@ -137,6 +144,7 @@ public class Login {
 //                        doctorInterface dp = new doctorInterface(user);
 //                        //dp.showPage();
 //                    }
+                }
                 }
             }
         });
