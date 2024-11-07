@@ -1,6 +1,6 @@
-Event Name: Games day
-Event Date: 11-11-2024
+Event Name: event
+Event Date: w
 Event Faculty: fcit
-Event Location: kau
-Event Time: 8:00 am
-Event Details: -
+Event Location: fcit
+Event Time: 10
+Event Details: do

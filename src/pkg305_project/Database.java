@@ -40,7 +40,7 @@ public class Database {
     String createDatabase = "CREATE DATABASE IF NOT EXISTS KAUEvents";
     
     //connect to mySql server
-    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "Leena1234");
+    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "KSA_Raghad");
              Statement st = conn.createStatement()) {
             // Execute statement to create the database
             st.executeUpdate(createDatabase);
@@ -58,7 +58,7 @@ public class Database {
         try {
             //Set the connection to KAU_EVENTS DB
             String connectionURL = "jdbc:mysql://localhost:3306/KAUEvents";
-            con = DriverManager.getConnection(connectionURL, "root", "Leena1234");
+            con = DriverManager.getConnection(connectionURL, "root", "KSA_Raghad");
             System.out.println("Connected to the database.");
         } catch (SQLException s) {
             System.out.println("SQL statement for connecting to the database is not executed!");
@@ -247,6 +247,21 @@ public class Database {
             System.out.println("Failed to add event: " + e.getMessage());
         }
     }
+    //delete event
+   public boolean deleteEvent(String eventName) {
+    String query = "DELETE FROM event WHERE eventName = ?";
+    try (PreparedStatement st = con.prepareStatement(query)) {
+        st.setString(1, eventName);
+        int rowsAffected = st.executeUpdate();
+        return rowsAffected > 0;
+    } catch (SQLException s) {
+        System.out.println("Failed to delete event: " + s.getMessage());
+        s.printStackTrace();
+        return false;
+    }
+}
+
+
     
     
     //method to find user's email and password

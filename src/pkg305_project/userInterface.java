@@ -187,28 +187,34 @@ public class userInterface {
             JButton delete = createStyledButton("Delete");
             delete.setPreferredSize(new Dimension(100, 40)); // Set preferred size for delete button
 
-            delete.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    String[] options = {"Delete", "No"};
-                    int choice = JOptionPane.showOptionDialog(
-                            null,
-                            "Are you sure?",
-                            "Confirmation",
-                            JOptionPane.DEFAULT_OPTION,
-                            JOptionPane.WARNING_MESSAGE,
-                            null,
-                            options,
-                            options[1]
-                    );
+          delete.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String[] options = {"Delete", "No"};
+        int choice = JOptionPane.showOptionDialog(
+                null,
+                "Are you sure?",
+                "Confirmation",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null,
+                options,
+                options[1]
+        );
 
-                    if (choice == 0) {
-                        //System.out.println("Item deleted");
-                    } else {
-                        //System.out.println("Deletion canceled");
-                    }
-                }
-            });
+        if (choice == 0) { // If "Delete" is selected
+            if (db.deleteEvent(event.getEventName())) { // Use `event.getEventName()` instead of `getEventID()`
+                JOptionPane.showMessageDialog(null, "Event deleted successfully.");
+                eventListPanel.remove(panel); // Remove the event panel from the UI
+                eventListPanel.revalidate();
+                eventListPanel.repaint();
+            } else {
+                JOptionPane.showMessageDialog(null, "Failed to delete the event.");
+            }
+        }
+    }
+});
+
             buttonPanel.add(detailsButton);
             buttonPanel.add(delete); 
         } else {
@@ -373,7 +379,7 @@ public class userInterface {
     }
 
     // Execute the query and display events
-    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/KAUEvents", "root", "Leena1234");
+    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/KAUEvents", "root", "KSA_Raghad");
          Statement stmt = conn.createStatement();
          ResultSet rs = stmt.executeQuery(query)) {
 
