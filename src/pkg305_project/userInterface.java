@@ -180,49 +180,11 @@ public class userInterface {
        
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT)); // Align buttons to the left
         buttonPanel.setOpaque(false); // Make the background visible
-        ///me
-        JButton delete = createStyledButton("Delete");
-delete.setPreferredSize(new Dimension(100, 40));
-
-delete.addActionListener(new ActionListener() {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String[] options = {"Delete", "No"};
-        int choice = JOptionPane.showOptionDialog(
-                null,
-                "Are you sure?",
-                "Confirmation",
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.WARNING_MESSAGE,
-                null,
-                options,
-                options[1]
-        );
-
-        if (choice == 0) {
-            if (db.deleteEvent(event.getEventName())) { // Delete the event based on name
-                JOptionPane.showMessageDialog(null, "Event deleted successfully.");
-                eventListPanel.remove(panel); // Remove the event panel from the UI
-                eventListPanel.revalidate();
-                eventListPanel.repaint();
-            } else {
-                JOptionPane.showMessageDialog(null, "Failed to delete the event.");
-            }
-        }
-    }
-});
-
-// Add both Details and Delete buttons unconditionally
-buttonPanel.add(detailsButton);
-buttonPanel.add(delete);
-
-        
-//        if (ispublisher) {
-//            // Add the Delete button only if the user is the publisher
-//            JButton delete = createStyledButton("Delete");
-//            delete.setPreferredSize(new Dimension(100, 40)); // Set preferred size for delete button
+        //m
+//        JButton delete = createStyledButton("Delete");
+//delete.setPreferredSize(new Dimension(100, 40));
 //
-//          delete.addActionListener(new ActionListener() {
+//delete.addActionListener(new ActionListener() {
 //    @Override
 //    public void actionPerformed(ActionEvent e) {
 //        String[] options = {"Delete", "No"};
@@ -237,8 +199,8 @@ buttonPanel.add(delete);
 //                options[1]
 //        );
 //
-//        if (choice == 0) { // If "Delete" is selected
-//            if (db.deleteEvent(event.getEventName())) { // Use `event.getEventName()` instead of `getEventID()`
+//        if (choice == 0) {
+//            if (db.deleteEvent(event.getEventName())) { // Delete the event based on name
 //                JOptionPane.showMessageDialog(null, "Event deleted successfully.");
 //                eventListPanel.remove(panel); // Remove the event panel from the UI
 //                eventListPanel.revalidate();
@@ -250,11 +212,49 @@ buttonPanel.add(delete);
 //    }
 //});
 //
-//            buttonPanel.add(detailsButton);
-//            buttonPanel.add(delete); 
-//        } else {
-//            buttonPanel.add(detailsButton);
-//        }
+//// Add both Details and Delete buttons unconditionally
+//buttonPanel.add(detailsButton);
+//buttonPanel.add(delete);
+
+        
+        if (ispublisher) {
+            // Add the Delete button only if the user is the publisher
+            JButton delete = createStyledButton("Delete");
+            delete.setPreferredSize(new Dimension(100, 40)); // Set preferred size for delete button
+
+          delete.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String[] options = {"Delete", "No"};
+        int choice = JOptionPane.showOptionDialog(
+                null,
+                "Are you sure?",
+                "Confirmation",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null,
+                options,
+                options[1]
+        );
+
+        if (choice == 0) { // If "Delete" is selected
+            if (db.deleteEvent(event.getEventName())) { // Use `event.getEventName()` instead of `getEventID()`
+                JOptionPane.showMessageDialog(null, "Event deleted successfully.");
+                eventListPanel.remove(panel); // Remove the event panel from the UI
+                eventListPanel.revalidate();
+                eventListPanel.repaint();
+            } else {
+                JOptionPane.showMessageDialog(null, "Failed to delete the event.");
+            }
+        }
+    }
+});
+
+            buttonPanel.add(detailsButton);
+            buttonPanel.add(delete); 
+        } else {
+            buttonPanel.add(detailsButton);
+        }
 
         
 
