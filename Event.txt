@@ -1,6 +1,6 @@
-Event Name: event
-Event Date: w
-Event Faculty: fcit
-Event Location: fcit
-Event Time: 10
-Event Details: do
+Event Name: raghad
+Event Date: 11
+Event Faculty: raghad
+Event Location: raghad
+Event Time: 11
+Event Details: raghad

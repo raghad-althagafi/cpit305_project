@@ -11,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -40,7 +42,7 @@ public class Database {
     String createDatabase = "CREATE DATABASE IF NOT EXISTS KAUEvents";
     
     //connect to mySql server
-    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "KSA_Raghad");
+    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "raghad");
              Statement st = conn.createStatement()) {
             // Execute statement to create the database
             st.executeUpdate(createDatabase);
@@ -58,7 +60,7 @@ public class Database {
         try {
             //Set the connection to KAU_EVENTS DB
             String connectionURL = "jdbc:mysql://localhost:3306/KAUEvents";
-            con = DriverManager.getConnection(connectionURL, "root", "KSA_Raghad");
+            con = DriverManager.getConnection(connectionURL, "root", "raghad");
             System.out.println("Connected to the database.");
         } catch (SQLException s) {
             System.out.println("SQL statement for connecting to the database is not executed!");
@@ -267,23 +269,43 @@ public class Database {
     //method to find user's email and password
     public String[] findUserInformation(String username) {
         String email = null, password = null, userName = null;
-        try {
-            String query = "SELECT email, password, username FROM users WHERE username = ?";
-            PreparedStatement st = con.prepareStatement(query);
-            st.setString(1, username); 
+        String query = "SELECT email, password, username FROM users WHERE username = ?";
+        try (PreparedStatement st = con.prepareStatement(query)) {
+            st.setString(1, username);
 
-            ResultSet result = st.executeQuery();
-            if (result.next()) {
-                email = result.getString("email");
-                password = result.getString("password");
-                userName = result.getString("username");
+            try (ResultSet result = st.executeQuery()) {
+                if (result.next()) {
+                    email = result.getString("email");
+                    password = result.getString("password");
+                    userName = result.getString("username");
+                } else {
+                    // Handle case where no user was found
+                    System.out.println("User not found for username: " + username);
+                }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
         return new String[] { email, password ,userName};
     }
+    
+    
+    //method to retrieve all the emails
+    public List<String> getAllEmails() {
+        String query = "SELECT email FROM users";
+        List<String> emails = new ArrayList<>();
+        try (Statement st = con.createStatement(); ResultSet rs = st.executeQuery(query)) {
+            while (rs.next()) {
+                emails.add(rs.getString("email"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    return emails;
+    }
+    
+    
     
     //method to update user's information
     public boolean UpdateUser(String oldUsername, String newUsername, String email, String password) {

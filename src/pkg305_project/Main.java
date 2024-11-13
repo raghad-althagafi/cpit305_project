@@ -19,6 +19,7 @@ public class Main {
     public static void main(String[] args) {
         //create main frame
         new MainFrame();
+        //Email.sendEmail(new Database().getAllEmails(), "test", "body");
         //create login frame
         //new Login();
         //create new register frame

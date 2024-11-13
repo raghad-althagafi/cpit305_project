@@ -36,7 +36,7 @@ public class userInterface {
     public userInterface(User user) {
         this.user = user;
         // Initialize DatabaseManager
-        db = user.getDb();
+        db = new Database();
         db.createTablesevent(); // Setup tables if they don't exist
         userFrame();
     }
@@ -414,7 +414,7 @@ public class userInterface {
     }
 
     // Execute the query and display events
-    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/KAUEvents", "root", "KSA_Raghad");
+    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/KAUEvents", "root", "raghad");
          Statement stmt = conn.createStatement();
          ResultSet rs = stmt.executeQuery(query)) {
 

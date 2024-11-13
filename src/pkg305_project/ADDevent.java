@@ -160,6 +160,7 @@ public class ADDevent {
             @Override
             public void actionPerformed(ActionEvent e) {
                 addEventToDatabase();
+                Email.sendEmail(dbManager.getAllEmails(),eventNameField.getText(),dateField.getText(),timeField.getText(),locationField.getText());
             }
         });
         addButton.addActionListener(new ActionListener() {
@@ -193,6 +194,8 @@ public class ADDevent {
         dbManager.addEvent(eventName, date,time ,location,college,publisher, details);
         JOptionPane.showMessageDialog(null, "The event has been added to the database!");
     }
+    
+   
     
     
 }

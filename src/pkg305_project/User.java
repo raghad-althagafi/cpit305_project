@@ -15,9 +15,9 @@ public class User {
    private String password;
    private String email;
 
-    public User(String Username,Database db) {
+    public User(String Username) {
         this.Username = Username;
-        this.db = db;
+        db = new Database();
         String[] emailAndPassword = db.findUserInformation(Username);
          this.email = emailAndPassword[0];
         this.password = emailAndPassword[1];

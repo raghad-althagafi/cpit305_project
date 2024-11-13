@@ -129,7 +129,7 @@ public class Login {
                 String passInput = passText.getText();
                 
                 //make user object
-                User user = new User(userInput,db);
+                User user = new User(userInput);
                 
                 //check user login
                 if (db.checkLogin(userInput, passInput) == true){
@@ -137,7 +137,7 @@ public class Login {
 //                    if(db.checkRole(userInput)==true){ //if student
                         frame.dispose(); //close the current frame
 //                        StudentInterface st = new StudentInterface(user);
-                         userInterface userinterface = new StudentInterface(user);
+                         userInterface userinterface = new userInterface(user);
 //                    }
 //                    else if(db.checkRole(userInput)==false){ //if Dr
 //                        frame.dispose(); //close the current frame

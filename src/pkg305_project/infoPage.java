@@ -21,11 +21,12 @@ import javax.swing.SwingUtilities;
  */
 public class infoPage {
     private User user;
-
+    private Database db;
     
 
     public infoPage(User user) {
         this.user = user;
+        Database db = new Database();
     }
     
     
@@ -105,7 +106,7 @@ public class infoPage {
         Cbutton.addActionListener(new ActionListener() {   
             @Override
             public void actionPerformed(ActionEvent e) {
-                boolean updated = user.getDb().UpdateUser(user.getUsername(), nameTF.getText(), EmailTF.getText(), PasswordTF.getText());
+                boolean updated = db.UpdateUser(user.getUsername(), nameTF.getText(), EmailTF.getText(), PasswordTF.getText());
                 //Checks if it is updated or not
                 if(updated){
                 JOptionPane.showMessageDialog(f, "Your information has been successfully updated.", "Profile update", JOptionPane.PLAIN_MESSAGE);
@@ -128,7 +129,7 @@ public class infoPage {
                 int response = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete this account?","Quesiton", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
             // Check if the user clicked "Yes"
                 if (response == JOptionPane.YES_OPTION) {
-                    user.getDb().deleteUser(user.getUsername());
+                    db.deleteUser(user.getUsername());
                     //close the current frame
                     ((JFrame) SwingUtilities.getWindowAncestor(DelButton)).dispose();                    
                     // If Yes show the main page
@@ -161,8 +162,6 @@ public class infoPage {
             public void actionPerformed(ActionEvent e) {
                  //close the current frame
                 ((JFrame) SwingUtilities.getWindowAncestor(Bbutton)).dispose();
-//                dHomePage dp = new dHomePage(user);
-//                dp.showPage();
             }
 
     
