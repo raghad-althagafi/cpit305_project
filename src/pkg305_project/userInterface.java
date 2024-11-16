@@ -32,6 +32,7 @@ public class userInterface {
     protected Database db;
     protected Connection con;
     private JCheckBox[] checkBoxes; // Array to hold faculty checkboxes
+    private UpdateEventThread updateEventThread;
 
     public userInterface(User user) {
         this.user = user;
@@ -39,6 +40,9 @@ public class userInterface {
         db = new Database();
         db.createTablesevent(); // Setup tables if they don't exist
         userFrame();
+        
+        updateEventThread = new UpdateEventThread(db, this);
+        updateEventThread.start();
     }
     
     public void userFrame(){
@@ -414,7 +418,7 @@ public class userInterface {
     }
 
     // Execute the query and display events
-    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/KAUEvents", "root", "raghad");
+    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/KAUEvents", "root", "shahad");
          Statement stmt = conn.createStatement();
          ResultSet rs = stmt.executeQuery(query)) {
 
