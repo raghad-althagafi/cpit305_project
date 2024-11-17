@@ -23,9 +23,7 @@ public class Email {
   
     public static void sendEmail(List<String> users,String eventName,String date,String time,String location) {
        
-        String body = "Dear name,\n"
-                + "\n"
-                + "We are excited to inform you that a new event has been added:\n"
+        String body =  "We are excited to inform you that a new event has been added:\n"
                 + "\n"
                 + "Event Name: "+eventName+"\n"
                 + "Date: "+date+"\n"

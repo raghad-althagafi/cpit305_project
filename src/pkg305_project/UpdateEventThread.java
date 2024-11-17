@@ -17,7 +17,6 @@ public class UpdateEventThread extends Thread {
 
     private int rows;
     private Database db;
-    private User user;
     private userInterface ui;
 
     public UpdateEventThread(Database db, userInterface ui) {
@@ -33,9 +32,8 @@ public class UpdateEventThread extends Thread {
                 if (newRows != rows) {
                     ui.readFromDatabase(db);
                     rows = newRows;
-                    JOptionPane.showMessageDialog(null, "new event has been added\n"  );
                 }
-                Thread.sleep(5000);
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 continue;
             }

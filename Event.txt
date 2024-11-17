@@ -1,6 +1,6 @@
-Event Name: raghad
-Event Date: 11
-Event Faculty: raghad
-Event Location: raghad
-Event Time: 11
-Event Details: raghad
+Event Name: Science 4
+Event Date: 2025-11-11
+Event Faculty: Science
+Event Location: Science
+Event Time: 11:11
+Event Details: Science

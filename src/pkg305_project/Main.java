@@ -19,6 +19,10 @@ public class Main {
     public static void main(String[] args) {
         //create main frame
         new MainFrame();
+       Database db = new  Database();
+       User user = new User("raghad");
+//db.deleteUser("r");       
+//boolean updated = db.UpdateUser(user.getUsername(), user.getUsername(), user.getEmail(), "raghad");
         //Email.sendEmail(new Database().getAllEmails(), "test", "body");
         //create login frame
         //new Login();

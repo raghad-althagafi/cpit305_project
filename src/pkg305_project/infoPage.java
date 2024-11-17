@@ -22,11 +22,13 @@ import javax.swing.SwingUtilities;
 public class infoPage {
     private User user;
     private Database db;
+    private JFrame ui;
     
 
-    public infoPage(User user) {
+    public infoPage(User user, Database db, JFrame ui) {
         this.user = user;
-        Database db = new Database();
+        this.db = db;
+        this.ui = ui;
     }
     
     
@@ -129,9 +131,12 @@ public class infoPage {
                 int response = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete this account?","Quesiton", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
             // Check if the user clicked "Yes"
                 if (response == JOptionPane.YES_OPTION) {
+                    System.out.println(user.getUsername());
+                    
                     db.deleteUser(user.getUsername());
-                    //close the current frame
-                    ((JFrame) SwingUtilities.getWindowAncestor(DelButton)).dispose();                    
+                    //close the current frame and userIterface frame
+                    ((JFrame) SwingUtilities.getWindowAncestor(DelButton)).dispose(); 
+                     ui.dispose(); 
                     // If Yes show the main page
                     MainFrame mainFrame = new MainFrame();
 
@@ -151,8 +156,9 @@ public class infoPage {
                     // If Yes show the main page
                      MainFrame mainFrame = new MainFrame();
 
-                    //close the current frame
+                    //close the current frame userIterface frame
                     ((JFrame) SwingUtilities.getWindowAncestor(logButton)).dispose();
+                    ui.dispose();
                 }
             }
         });
