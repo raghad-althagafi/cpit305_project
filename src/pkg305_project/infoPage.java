@@ -130,9 +130,7 @@ public class infoPage {
             public void actionPerformed(ActionEvent e) {
                 int response = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete this account?","Quesiton", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
             // Check if the user clicked "Yes"
-                if (response == JOptionPane.YES_OPTION) {
-                    System.out.println(user.getUsername());
-                    
+                if (response == JOptionPane.YES_OPTION) {                    
                     db.deleteUser(user.getUsername());
                     //close the current frame and userIterface frame
                     ((JFrame) SwingUtilities.getWindowAncestor(DelButton)).dispose(); 
