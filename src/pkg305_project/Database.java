@@ -19,174 +19,160 @@ import java.util.List;
  * @author msbbr
  */
 public class Database {
-    
+
     private Connection con;
 
     public Database() {
         //(1) create the database
         createDB();
         //(2) connect to database
-       connectToDatabase();
+        connectToDatabase();
         //(3) create DB tables 
         createTables();
         //create event table 
         createTablesevent();
     }
-    
+
     //------------------------------------
-    
     //method for creating DB
-    public void createDB(){
-    
-    //statment for create DB
-    String createDatabase = "CREATE DATABASE IF NOT EXISTS KAUEvents";
-    
-    //connect to mySql server
-    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "raghad");
-             Statement st = conn.createStatement()) {
+    public void createDB() {
+
+        //statment for create DB
+        String createDatabase = "CREATE DATABASE IF NOT EXISTS KAUEvents";
+
+        //connect to mySql server
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "shahad");
+                Statement st = conn.createStatement()) {
             // Execute statement to create the database
             st.executeUpdate(createDatabase);
             System.out.println("Database created if not exists.");
         } catch (SQLException s) {
             System.out.println("SQL statement for database creation is not executed!");
         }
-        
+
     }
-    
+
     //------------------------------------
-    
     // Connect to the database
     private void connectToDatabase() {
         try {
             //Set the connection to KAU_EVENTS DB
             String connectionURL = "jdbc:mysql://localhost:3306/KAUEvents";
-            con = DriverManager.getConnection(connectionURL, "root", "raghad");
+            con = DriverManager.getConnection(connectionURL, "root", "shahad");
             System.out.println("Connected to the database.");
         } catch (SQLException s) {
             System.out.println("SQL statement for connecting to the database is not executed!");
         }
     }
-    
+
     //------------------------------------
     //method for creating tables of DB
-    public void createTables(){
-        
+    public void createTables() {
+
         //user table statment
         String usersTable = "CREATE TABLE IF NOT EXISTS users ("
-                                + "username VARCHAR(13) NOT NULL PRIMARY KEY, "
-                                + "email VARCHAR(50) NOT NULL, "
-                                + "role VARCHAR(50),"
-                                + "password VARCHAR(50) NOT NULL"
-                                +")";
-        
-        try(Statement st = con.createStatement()){
+                + "username VARCHAR(13) NOT NULL PRIMARY KEY, "
+                + "email VARCHAR(50) NOT NULL, "
+                + "role VARCHAR(50),"
+                + "password VARCHAR(50) NOT NULL"
+                + ")";
+
+        try (Statement st = con.createStatement()) {
             //create users table
             st.executeUpdate(usersTable);
             System.out.println("user table created");
-        }
-        catch (SQLException s){
-         System.out.println("SQL statement is not executed!");
+        } catch (SQLException s) {
+            System.out.println("SQL statement is not executed!");
         }
     }
-    
 
-    
     //method to insert useres in users table
-    public void registerUser(String username, String email, String password){
-        
+    public void registerUser(String username, String email, String password) {
+
         //insert user row
         String user = "INSERT INTO users (username, email, role, password) VALUES (?, ?, ?, ?)";
-        
-        try (PreparedStatement st = con.prepareStatement(user)){
-            
+
+        try (PreparedStatement st = con.prepareStatement(user)) {
+
             //set the values of row
             st.setString(1, username);
             st.setString(2, email);
-            if(email.toLowerCase().contains("stu")){
+            if (email.toLowerCase().contains("stu")) {
                 st.setString(3, "Student");
-            }
-            else{
+            } else {
                 st.setString(3, "Doctor");
             }
             st.setString(4, password);
-            
+
             //excute statment
             st.executeUpdate();
             System.out.println("user added!");
-        }
-        catch (SQLException s){
-         System.out.println("SQL statement register is not executed!");
+        } catch (SQLException s) {
+            System.out.println("SQL statement register is not executed!");
         }
     }
-    
+
     //method to check user Login
-    public boolean checkLogin(String username,String Password){
+    public boolean checkLogin(String username, String Password) {
         String query = "SELECT password FROM users WHERE username=?";
-        
-        try (PreparedStatement st = con.prepareStatement(query)){
-            
+
+        try (PreparedStatement st = con.prepareStatement(query)) {
+
             //set the values of username
             st.setString(1, username);
-            
+
             //excute statment
             ResultSet rs = st.executeQuery();
-            
+
             //if user exists
-            if(rs.next()){
+            if (rs.next()) {
                 //the real pass
                 String RealPass = rs.getString("password");
                 //check if the entered pass equla the real pass
                 boolean flag = RealPass.trim().equalsIgnoreCase(Password.trim());
                 //return the value
                 return flag;
-            }
-            
-            //if user not found
-            else{
+            } //if user not found
+            else {
                 System.out.println("User not found");
                 return false;
             }
+        } catch (SQLException s) {
+            System.out.println("SQL statement is not executed!");
         }
-        catch (SQLException s){
-         System.out.println("SQL statement is not executed!");
-        }
-        
+
         return false;
     }
-    
-        public boolean checkRole(String username){
-            
-            String query = "SELECT role FROM users WHERE username=?";
-            
-            try(PreparedStatement st = con.prepareStatement(query)){
-                //set the values of username
-                st.setString(1, username);
-                //excute statment
-                ResultSet rs = st.executeQuery();
-                
-                //if user exists
-                if(rs.next()){
+
+    public boolean checkRole(String username) {
+
+        String query = "SELECT role FROM users WHERE username=?";
+
+        try (PreparedStatement st = con.prepareStatement(query)) {
+            //set the values of username
+            st.setString(1, username);
+            //excute statment
+            ResultSet rs = st.executeQuery();
+
+            //if user exists
+            if (rs.next()) {
                 //retrive role of user
                 String role = rs.getString("role");
-                
+
                 //check role
-                if(role.equalsIgnoreCase("Student")){
+                if (role.equalsIgnoreCase("Student")) {
                     return true;
-                }
-                else{ //if Dr
+                } else { //if Dr
                     return false;
                 }
-                
+
             }
-            }
-            catch (SQLException s){
+        } catch (SQLException s) {
             System.out.println("SQL statement is not executed!");
-            }
-            return false;
         }
-    
-    
-     
+        return false;
+    }
+
     // Method to print all users
     public void printAllUsers() {
         String query = "SELECT * FROM users"; // Use the actual table name
@@ -200,15 +186,16 @@ public class Database {
                 String role = rs.getString("role");
 
                 // Print the row
-                System.out.println("Username: "+username+" Email: "+email+ ", pass "+pass +" ,  role "+ role);
+                System.out.println("Username: " + username + " Email: " + email + ", pass " + pass + " ,  role " + role);
             }
         } catch (SQLException s) {
             System.out.println("SQL statement for retrieving users is not executed!");
             s.printStackTrace();
         }
     }
-        //------------------------------------
+    //------------------------------------
     // Method to create tables in the database
+
     public void createTablesevent() {
         // SQL statement to create a table for events
         String createEventsTable = "CREATE TABLE IF NOT EXISTS event ("
@@ -221,7 +208,7 @@ public class Database {
                 + "publisher VARCHAR(255), "
                 + "details TEXT"
                 + ")";
-        
+
         try (Statement st = con.createStatement()) {
             st.executeUpdate(createEventsTable);
             System.out.println("Events table created if not exists.");
@@ -229,18 +216,18 @@ public class Database {
             System.out.println("SQL statement for table creation is not executed!");
         }
     }
-    
+
     // Method to add event to the database
     public void addEvent(String eventName, String date, String time, String location, String college, String publisher, String details) {
         String insertEventSQL = "INSERT INTO event (eventName, eventDate, eventTime, location, college, publisher, details) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        
+
         try (PreparedStatement pstmt = con.prepareStatement(insertEventSQL)) {
             pstmt.setString(1, eventName);
             pstmt.setString(2, date);
             pstmt.setString(3, time);
             pstmt.setString(4, location);
             pstmt.setString(5, college);
-            pstmt.setString(6,publisher );
+            pstmt.setString(6, publisher);
             pstmt.setString(7, details);
 
             pstmt.executeUpdate();
@@ -249,23 +236,21 @@ public class Database {
             System.out.println("Failed to add event: " + e.getMessage());
         }
     }
+
     //delete event
-   public boolean deleteEvent(String eventName) {
-    String query = "DELETE FROM event WHERE eventName = ?";
-    try (PreparedStatement st = con.prepareStatement(query)) {
-        st.setString(1, eventName);
-        int rowsAffected = st.executeUpdate();
-        return rowsAffected > 0;
-    } catch (SQLException s) {
-        System.out.println("Failed to delete event: " + s.getMessage());
-        s.printStackTrace();
-        return false;
+    public boolean deleteEvent(String eventName) {
+        String query = "DELETE FROM event WHERE eventName = ?";
+        try (PreparedStatement st = con.prepareStatement(query)) {
+            st.setString(1, eventName);
+            int rowsAffected = st.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException s) {
+            System.out.println("Failed to delete event: " + s.getMessage());
+            s.printStackTrace();
+            return false;
+        }
     }
-}
 
-
-    
-    
     //method to find user's email and password
     public String[] findUserInformation(String username) {
         String email = null, password = null, userName = null;
@@ -286,10 +271,9 @@ public class Database {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new String[] { email, password ,userName};
+        return new String[]{email, password, userName};
     }
-    
-    
+
     //method to retrieve all the emails
     public List<String> getAllEmails() {
         String query = "SELECT email FROM users";
@@ -302,11 +286,9 @@ public class Database {
             e.printStackTrace();
         }
 
-    return emails;
+        return emails;
     }
-    
-    
-    
+
     //method to update user's information
     public boolean UpdateUser(String oldUsername, String newUsername, String email, String password) {
 
@@ -331,8 +313,8 @@ public class Database {
         }
         return false;
     }
-    
-     public boolean deleteUser(String username) {
+
+    public boolean deleteUser(String username) {
         String query = "DELETE FROM users WHERE username = ?";
         try (PreparedStatement st = con.prepareStatement(query)) {
             st.setString(1, username);
@@ -353,18 +335,29 @@ public class Database {
             return false;
         }
     }
- 
-     public void addSampleEvents(){
-    String query = "INSERT INTO events "
-            + "(eventName, eventDate, eventTime, location, college, publisher, details) VALUES"
-            + "('Games Day', '2024-11-05', '11am', 'FCIT lounge', 'FCIT', 'Sara' ,'visit us'),"
-            + "('G Day', '2024-11-05', '11am', 'FCIT lounge', 'FCIT', 'Shahad', 'visit')";
-    try (PreparedStatement st = con.prepareStatement(query)) {
-        st.executeUpdate(query);
 
-    } catch (SQLException s) {
-        System.out.println("Failed to update events: " + s.getMessage());
+    public void addSampleEvents() {
+        String query = "INSERT INTO event "
+                + "(eventName, eventDate, eventTime, location, college, publisher, details) VALUES"
+                + "('Games Day', '2024-11-05', '11am', 'FCIT lounge', 'FCIT', 'Sara' ,'visit us'),"
+                + "('G Day', '2024-11-05', '11am', 'FCIT lounge', 'FCIT', 'Shahad', 'visit')";
+        try (PreparedStatement st = con.prepareStatement(query)) {
+            st.executeUpdate(query);
+
+        } catch (SQLException s) {
+            System.out.println("Failed to update events: " + s.getMessage());
+        }
+    }
+
+    public int checkRows() {
+        String query = "SELECT COUNT(*) FROM event";
+        try (PreparedStatement st = con.prepareStatement(query)) {
+            ResultSet result = st.executeQuery(query);
+            if(result.next())
+                return result.getInt(1);
+        }catch (SQLException s) {
+            System.out.println("Failed to count events rows: " + s.getMessage());
+        }
+        return 0;  
     }
 }
-}
-
