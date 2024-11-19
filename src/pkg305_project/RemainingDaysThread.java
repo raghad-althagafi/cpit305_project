@@ -57,7 +57,7 @@ public class RemainingDaysThread extends Thread {
 
             detail.addRemainingDays(time);//adding the remaing days in the details page
 
-            PrintWriter out = new PrintWriter(new FileWriter(".\\Event.txt")); //write event remaing days in a file
+            PrintWriter out = new PrintWriter(new FileWriter(".\\Event.txt", true)); //write event remaing days in a file
             out.println(time);
             out.close();//close 
         } catch (IOException e) {

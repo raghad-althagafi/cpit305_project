@@ -363,7 +363,7 @@ public class userInterface {
         }
 
         // Execute the query and display events
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/KAUEvents", "root", "shahad");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/KAUEvents", "root", "Leena1234");
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(query)) {
 
