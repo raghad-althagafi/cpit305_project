@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package pkg305_project;
 
 import javax.swing.*;
@@ -15,6 +11,7 @@ import java.io.PrintWriter;
 
 public class Details {
     private Event event;
+    private JPanel panel;
     // Constructor for the Details class
     Details(Event event) {
         this.event = event;
@@ -23,49 +20,24 @@ public class Details {
         // Create a JFrame for the details window
         JFrame details = new JFrame("Event Details");
         details.setSize(800, 600); // Set size of the frame
-        details.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close application on exit
+        details.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Close application on exit
         details.setBackground(ColorsFonts.lightPurple); // Set background color (not effective on JFrame)
         details.setLocationRelativeTo(null);
 
         // Create a JPanel to hold all components
         JPanel panel = new JPanel();
+        this.setPanel(panel);
         panel.setLayout(null); // Use null layout for manual positioning
         panel.setBounds(0, 0, 1000, 900); // Set position and size
         panel.setBackground(ColorsFonts.lightPurple); // Set panel background color
 
-        //open in file button
-//        JButton openFile = createStyledButton("Open in File");
-//        openFile.setBounds(250, 450, 200, 50); // Set position and size of the button
-//
-//        // Add action listener to the 'open in file' button
-//        openFile.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                try{
-//                    PrintWriter out = new PrintWriter(new FileWriter(".\\Event.txt")); //write event information in a file
-//                    out.println("Event Name: ");// write detaila in file
-//                    out.println("Event Date: ");
-//                    out.println("Event Faculty: ");
-//                    out.println("Event Location: ");
-//                    out.println("Event Time: ");
-//                    out.println("Event Details: ");
-//                    out.close();//close
-//                }
-//                catch(IOException ex){ //if exception occur
-//                    System.out.println(ex.getMessage());
-//                }
-//            }
-//        });
-//
-//
-//        // Add components to the panel
-//        panel.add(openFile);
         addBackButton(details, panel);
         addEventsName(panel);
         addEventsFaculty(panel);
         addEventsTime(panel);
         addEventsLocation(panel);
         addEventsDetails(panel);
+        
 
         // Set layout for the details JFrame and add the panel
         details.setLayout(null);
@@ -97,23 +69,35 @@ public class Details {
         });
         panel.add(back);
     }
+    
+    public void setPanel(JPanel panel){
+        this.panel = panel;
+    }
+    public JPanel getPanel(){
+        return panel;
+    }
+    //Create a label for the remaining days
+    public void addRemainingDays(String time){
+        JLabel facultyName = new JLabel(time);
+        detailsLabel(facultyName,getPanel(), 130);
+    }
 
     //Create a label for the faculty name
     private void addEventsFaculty(JPanel panel){
         JLabel facultyName = new JLabel("Faculty: " + event.getFaculty());
-        detailsLabel(facultyName,panel, 160);
+        detailsLabel(facultyName,panel, 170);
     }
 
     //Create a label for the event time
     private void addEventsTime(JPanel panel){
         JLabel eventTime = new JLabel("Event Time: " + event.getEventDate() + ", " + event.getTime());
-        detailsLabel(eventTime,panel, 200);;
+        detailsLabel(eventTime,panel, 210);;
     }
 
     //Create a label for the event location
     private void addEventsLocation(JPanel panel){
         JLabel eventLocation = new JLabel("Event Location: " + event.getLocation());
-        detailsLabel(eventLocation, panel, 240);
+        detailsLabel(eventLocation, panel, 250);
     }
 
     // Add a label for the event location
@@ -133,14 +117,14 @@ public class Details {
         eventsName.setHorizontalAlignment(JLabel.LEFT); // Center align text
         eventsName.setFont(ColorsFonts.fontButton); // Set font style and size
         eventsName.setForeground(ColorsFonts.darkPurple); // Set text color
-        eventsName.setBounds(80, 100, 530, 100); // Set position and size of the label
+        eventsName.setBounds(80, 90, 530, 100); // Set position and size of the label
         panel.add(eventsName);
     }
 
     // Create a JTextPane for additional text
     public void addEventsDetails(JPanel panel){
         JLabel eventLabel = new JLabel("Event Details: ");
-        detailsLabel(eventLabel, panel, 280);
+        detailsLabel(eventLabel, panel, 290);
         JTextPane textArea = new JTextPane();
         String text = event.getDetails();
         //check if there is a detail for the event
@@ -156,7 +140,7 @@ public class Details {
         panel.add(textArea);
         // Create a JScrollPane to allow scrolling for the text area
         JScrollPane scrollPane = new JScrollPane(textArea);
-        scrollPane.setBounds(120, 320, 530, 200); // Set position and size
+        scrollPane.setBounds(120, 330, 530, 190); // Set position and size
         scrollPane.setForeground(ColorsFonts.lightPurple);
         panel.add(scrollPane);
     }

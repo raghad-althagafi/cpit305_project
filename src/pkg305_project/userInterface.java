@@ -21,12 +21,12 @@ import javax.swing.border.LineBorder;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  *
  * @author AHC
  */
 public class userInterface {
+
     protected User user;
     protected JPanel eventListPanel;
     protected Database db;
@@ -34,7 +34,6 @@ public class userInterface {
     private JCheckBox[] checkBoxes; // Array to hold faculty checkboxes
     private UpdateEventThread updateEventThread;
     private JFrame userFrame;
-    
 
     public userInterface(User user) {
         this.user = user;
@@ -42,13 +41,13 @@ public class userInterface {
         db = new Database();
         db.createTablesevent(); // Setup tables if they don't exist
         userFrame();
-        
+
         updateEventThread = new UpdateEventThread(db, this);
         updateEventThread.start();
     }
-    
-    public void userFrame(){
-        
+
+    public void userFrame() {
+
         userFrame = new JFrame("Event page");
         userFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         userFrame.setLayout(null);
@@ -65,7 +64,7 @@ public class userInterface {
         JLabel eventsLabel = new JLabel("KAU EVENTS");
         eventsLabel.setFont(ColorsFonts.fontTitle);
         eventsLabel.setForeground(ColorsFonts.darkPurple);
-        eventsLabel.setBounds(200, 20, 300, 50); 
+        eventsLabel.setBounds(200, 20, 300, 50);
         rightPanel.add(eventsLabel);
 
         //"Add new Event" Button (only if user is not a student)
@@ -107,11 +106,11 @@ public class userInterface {
         userFrame.revalidate();
         userFrame.repaint();
         userFrame.setVisible(true);
-        
+
         readFromDatabase(db);
-}
-    
-        // Create the event panel
+    }
+
+    // Create the event panel
     private JPanel createEventPanel(Event event, boolean ispublisher) {
         // Set the main panel
         JPanel panel = new JPanel(new BorderLayout(50, 3)); // Create a panel with layout
@@ -143,8 +142,14 @@ public class userInterface {
         eventDate.setForeground(ColorsFonts.darkPurple);
 
         // Set the remaining days for the events
-        String date =  event.getEventDate();
-        JLabel remainLabel = new JLabel("remain days: " + remainingDays(date) + " days");
+        String date = event.getEventDate();
+        int days = remainingDays(date);
+        JLabel remainLabel;
+        if (days == 0) {
+            remainLabel = new JLabel("Event is today");
+        } else {
+            remainLabel = new JLabel("remain days: " + remainingDays(date) + " days");
+        }
         remainLabel.setForeground(ColorsFonts.darkPurple);
 
         info.add(Box.createVerticalStrut(20)); // Adding spacing
@@ -160,21 +165,21 @@ public class userInterface {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Details details = new Details(event); // Create Details page when pressing the button
-                
+
                 PrintThread thread1 = new PrintThread(event); //thread to print event info in file
+                RemainingDaysThread thread2 = new RemainingDaysThread(userInterface.this, event, details);
+
                 thread1.start();
-                
+                thread2.start();
+
                 details.DetailPage();
             }
-            
-          
+
         });
-       
+
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT)); // Align buttons to the left
         buttonPanel.setOpaque(false); // Make the background visible
 
-
-        
         if (ispublisher) {
             // Add the Delete button only if the user is the publisher
             JButton delete = createStyledButton("Delete");
@@ -214,8 +219,6 @@ public class userInterface {
             buttonPanel.add(detailsButton);
         }
 
-
-
         // Assign the layout for the panels
         panel.add(publisher, BorderLayout.WEST); // It will be in the left
         panel.add(info, BorderLayout.CENTER); // It will be in the center
@@ -223,28 +226,28 @@ public class userInterface {
 
         return panel;
     }
-    
-        // calculate the remaining days for the event
-    private int remainingDays(String stringdate) {
+
+    // calculate the remaining days for the event
+    public int remainingDays(String stringdate) {
         try {
-        LocalDate eventDate = LocalDate.parse(stringdate.trim());
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String date = eventDate.format(format);
-        LocalDate today = LocalDate.now();
-        long days = ChronoUnit.DAYS.between(today, eventDate);
-        
-        // If you want to show negative days for past events
-        return (int) days;
-        
-        // Or if you want to return 0 for past events
-        // return Math.max(0, (int) days);
-    } catch (DateTimeParseException e) {
-        System.out.println("Error parsing date: " + e);
-        return 0;  // or handle the error differently
+            LocalDate eventDate = LocalDate.parse(stringdate.trim());
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy[-MM][-dd]");
+            String date = eventDate.format(format);
+            LocalDate today = LocalDate.now();
+            long days = ChronoUnit.DAYS.between(today, eventDate);
+
+            // If you want to show negative days for past events
+            return (int) days;
+
+            // Or if you want to return 0 for past events
+            // return Math.max(0, (int) days);
+        } catch (DateTimeParseException e) {
+            System.out.println("Error parsing date: " + e);
+            return -1;  // or handle the error differently
+        }
     }
-    }
-    
-        public static JButton createStyledButton(String text) {
+
+    public static JButton createStyledButton(String text) {
         JButton button = new JButton(text);
         button.setBackground(ColorsFonts.darkPurple); // Set button background color
         button.setFont(ColorsFonts.smallText); // Set font style
@@ -254,11 +257,8 @@ public class userInterface {
         //button.setBorderPainted(false);
         return button;
     }
-        
 
-            
-            
-        public void addLeftPanel(JFrame frame) {
+    public void addLeftPanel(JFrame frame) {
         // Create a left panel with checkboxes
         JPanel leftPanel = new JPanel();
         leftPanel.setBackground(ColorsFonts.midPurpule); // Set background color
@@ -275,7 +275,7 @@ public class userInterface {
         userButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                infoPage iPage = new infoPage(user,db,userFrame);
+                infoPage iPage = new infoPage(user, db, userFrame);
                 iPage.showPage();
             }
         });
@@ -288,11 +288,8 @@ public class userInterface {
 
         frame.add(leftPanel);
     }
-    
-    
-    
-    
-        public void addCheckboxes(JPanel panel) {
+
+    public void addCheckboxes(JPanel panel) {
         JLabel label = new JLabel("Faculty:");
         label.setFont(ColorsFonts.fontButton);
         label.setForeground(Color.WHITE);
@@ -345,10 +342,8 @@ public class userInterface {
             return selectedFaculties;
         }
     }
-           
-        
-        
-     public void readFromDatabase(Database db) {
+
+    public void readFromDatabase(Database db) {
         eventListPanel.removeAll(); // Clear previous event panels
         List<String> selectedFaculties = getSelectedFaculties(); // Get selected faculties
 
@@ -368,7 +363,7 @@ public class userInterface {
         }
 
         // Execute the query and display events
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/KAUEvents", "root", "raghad");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/KAUEvents", "root", "shahad");
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(query)) {
 
@@ -383,7 +378,7 @@ public class userInterface {
                         rs.getString("publisher"),
                         rs.getString("details"));
 
-                if (remainingDays(event.getEventDate()) > 0) {
+                if (remainingDays(event.getEventDate()) >= 0) {
                     boolean isPublisher = user.getUsername().equalsIgnoreCase(event.getUser()) && !user.Role();
                     eventListPanel.add(createEventPanel(event, isPublisher));
                     eventListPanel.add(Box.createRigidArea(new Dimension(0, 15)));
@@ -398,6 +393,5 @@ public class userInterface {
         eventListPanel.revalidate();
         eventListPanel.repaint();
     }
-
 
 }
