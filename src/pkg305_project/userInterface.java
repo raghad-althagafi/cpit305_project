@@ -202,7 +202,7 @@ public class userInterface {
 
                     if (choice == 0) { // If "Delete" is selected
                         if (db.deleteEvent(event.getEventName())) { // Use `event.getEventName()` instead of `getEventID()`
-                            JOptionPane.showMessageDialog(null, "Event deleted successfully.");
+                          //  JOptionPane.showMessageDialog(null, "Event deleted successfully.");
                             eventListPanel.remove(panel); // Remove the event panel from the UI
                             eventListPanel.revalidate();
                             eventListPanel.repaint();
@@ -363,7 +363,7 @@ public class userInterface {
         }
 
         // Execute the query and display events
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/KAUEvents", "root", "Leena1234");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/KAUEvents", "root", "KSA_Raghad");
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(query)) {
 

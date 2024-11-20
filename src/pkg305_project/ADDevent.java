@@ -125,16 +125,16 @@ public class ADDevent {
         collegeField.setBounds(290, 300,  330, 40);
         frame.add(collegeField);
         
-        // Create and add label and text field for publisher name
-        JLabel publishereLabel = new JLabel("publisher:");
-        publishereLabel.setFont(ColorsFonts.fontText);
-        publishereLabel.setForeground(ColorsFonts.darkPurple);
-        publishereLabel.setBounds(140, 350, 150, 30);
-        frame.add(publishereLabel);
-
-        publisherField = new JTextField();
-        publisherField.setBounds(290, 350,  330, 40);
-        frame.add(publisherField);
+//        // Create and add label and text field for publisher name
+//        JLabel publishereLabel = new JLabel("publisher:");
+//        publishereLabel.setFont(ColorsFonts.fontText);
+//        publishereLabel.setForeground(ColorsFonts.darkPurple);
+//        publishereLabel.setBounds(140, 350, 150, 30);
+//        frame.add(publishereLabel);
+//
+//        publisherField = new JTextField();
+//        publisherField.setBounds(290, 350,  330, 40);
+//        frame.add(publisherField);
 
         // Create and add label and text area for Details
         JLabel detailsLabel = new JLabel("Details:");
@@ -168,7 +168,9 @@ public class ADDevent {
             public void actionPerformed(ActionEvent e) {
               JOptionPane.showMessageDialog(frame, 
                     "The event has been added\n"  );
+              frame.dispose();
             }
+            
         });
         returnButton.addActionListener(new ActionListener() {
             @Override

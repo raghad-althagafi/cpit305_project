@@ -1,7 +1,7 @@
-Event Name: games
-Event Date: 2025-11-11
+Event Name: QQ
+Event Date: 2025-11-04
 Event Faculty: fcit
-Event Location: kau
-Event Time: 9:00
-Event Details: -
-Event remaining days is : 357
+Event Location: L
+Event Time: 8
+Event Details: rrrrrrrrr
+Event remaining days is : 349
