@@ -149,19 +149,9 @@ public class Register {
                 db.registerUser(userInput, emailInput, passInput);
                 //create user object
                 User user = new User(userInput);
-                userInterface userinterface = new userInterface(user);
-                frame.dispose();
-                //Check if its Dr or student to open appropriate frame
-//                if(emailInput.toLowerCase().contains("stu")){ //if student
-//                new StudentInterface(user);
-//                frame.dispose(); //close the current frame
-//                }
                 
-//                 else{ //if its Dr
-//                    doctorInterface dp = new doctorInterface(user);
-////                    dp.showPage();
-//                    frame.dispose(); //close the current frame
-//                 }
+                userInterface userinterface = new userInterface(user); //open home page frame
+                frame.dispose(); //close current frame
                 }
             }
         });

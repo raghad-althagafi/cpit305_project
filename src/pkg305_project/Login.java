@@ -134,16 +134,8 @@ public class Login {
                 //check user login
                 if (db.checkLogin(userInput, passInput) == true){
                     
-//                    if(db.checkRole(userInput)==true){ //if student
                         frame.dispose(); //close the current frame
-//                        StudentInterface st = new StudentInterface(user);
-                         userInterface userinterface = new userInterface(user);
-//                    }
-//                    else if(db.checkRole(userInput)==false){ //if Dr
-//                        frame.dispose(); //close the current frame
-//                        doctorInterface dp = new doctorInterface(user);
-//                        //dp.showPage();
-//                    }
+                         userInterface userinterface = new userInterface(user); //open home page frame
                 }
                 }
             }
