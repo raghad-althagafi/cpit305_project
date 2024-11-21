@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -32,12 +33,12 @@ public class ADDevent {
     public JTextField timeField;
     public JTextField locationField;
     public JTextField collegeField;
-     public JTextField publisherField;
+    public JTextField publisherField;
     public JTextArea detailsArea;
     public static final Color Dgreen=new Color(5,125,114);
     public Database dbManager;
     private User user;
-
+    public JComboBox<String> collegeComboBox;
     public ADDevent(User user) {
         this.user = user;
         // Initialize DatabaseManager
@@ -121,21 +122,13 @@ public class ADDevent {
         collegeLabel.setBounds(140, 300, 150, 30);
         frame.add(collegeLabel);
 
-        collegeField = new JTextField();
-        collegeField.setBounds(290, 300,  330, 40);
-        frame.add(collegeField);
-        
-//        // Create and add label and text field for publisher name
-//        JLabel publishereLabel = new JLabel("publisher:");
-//        publishereLabel.setFont(ColorsFonts.fontText);
-//        publishereLabel.setForeground(ColorsFonts.darkPurple);
-//        publishereLabel.setBounds(140, 350, 150, 30);
-//        frame.add(publishereLabel);
-//
-//        publisherField = new JTextField();
-//        publisherField.setBounds(290, 350,  330, 40);
-//        frame.add(publisherField);
+        // Initialize JComboBox with college names
+        String[] colleges = {"All Faculty", "Econ & Admin", "Engineering", "Computing", "Law", "Science"};
+        collegeComboBox = new JComboBox<>(colleges);
+        collegeComboBox.setBounds(290, 300, 330, 40);
+        frame.add(collegeComboBox);
 
+     
         // Create and add label and text area for Details
         JLabel detailsLabel = new JLabel("Details:");
         detailsLabel.setFont(ColorsFonts.fontText);
@@ -187,14 +180,13 @@ public class ADDevent {
         String date = dateField.getText();
         String time = timeField.getText();
         String location = locationField.getText();
-        String college = collegeField.getText();
+        String college = (String) collegeComboBox.getSelectedItem();
         String details = detailsArea.getText();
-        //String publisher=publisherField.getText();
         String publisher=user.getUsername();
 
         // Use DatabaseManager to add the event to the database
         dbManager.addEvent(eventName, date,time ,location,college,publisher, details);
-        JOptionPane.showMessageDialog(null, "The event has been added to the database!");
+      
     }
     
    
