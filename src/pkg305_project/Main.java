@@ -17,15 +17,15 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //create main frame
-        new MainFrame();
+        
+        new MainFrame(); //create main frame
 
-        createDB();
+        createDB(); //create database
     }
     
     public static void createDB(){
-        //database 
-        Database db = new Database();
+        
+        Database db = new Database(); //database 
         
     }
 

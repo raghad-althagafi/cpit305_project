@@ -1,7 +1,7 @@
-Event Name: LOW
-Event Date: 2025-02-05
-Event Faculty: All Faculty
-Event Location: LO
-Event Time: 8
-Event Details: hello
-Event remaining days is : 76
+Event Name: national2
+Event Date: 2025-11-11
+Event Faculty: f
+Event Location: k
+Event Time: 9
+Event Details: -
+Event remaining days is : 354
