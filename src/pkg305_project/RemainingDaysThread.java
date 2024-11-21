@@ -8,9 +8,11 @@ package pkg305_project;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -22,7 +24,8 @@ public class RemainingDaysThread extends Thread {
     private userInterface ui;
     private Event event;
     private Details detail;
-
+    private static final ReentrantLock lock = new ReentrantLock();
+    
     public RemainingDaysThread(userInterface ui, Event event, Details detail) {
         super("RemainingDaysThread");
         this.ui = ui;
@@ -33,6 +36,7 @@ public class RemainingDaysThread extends Thread {
     @Override
     public void run() {
         try {
+            lock.lock();
             String eventDate = event.getEventDate();
             int remaining = ui.remainingDays(eventDate); //calculate the remaining days for the event
             String time = null;
@@ -43,6 +47,8 @@ public class RemainingDaysThread extends Thread {
             } else {
                 time = "Event has passed";
             }
+            JOptionPane.showMessageDialog(null, 
+                    time  );
             //to ensure that the panel has been created and prevent errors
             int attempts = 0;
             while (detail.getPanel() == null && attempts < 10) {
@@ -64,6 +70,8 @@ public class RemainingDaysThread extends Thread {
             e.getMessage();
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
+        }finally{
+            lock.unlock();
         }
     }
 }

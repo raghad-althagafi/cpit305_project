@@ -318,6 +318,7 @@ public class userInterface {
                 }
             });
         }
+        checkBoxes[0].setSelected(true);
     }
 
     public List<String> getSelectedFaculties() {
@@ -363,7 +364,7 @@ public class userInterface {
         }
 
         // Execute the query and display events
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/KAUEvents", "root", "KSA_Raghad");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/KAUEvents", "root", "shahad");
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(query)) {
 
