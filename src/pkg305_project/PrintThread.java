@@ -5,6 +5,8 @@
  */
 package pkg305_project;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,6 +38,13 @@ public class PrintThread extends Thread{
                 out.println("Event Time: " + event.getTime());
                 out.println("Event Details: " + event.getDetails());
                 out.close();//close 
+                
+            File file = new File(".\\Event.txt"); //create file object
+            if (file.exists()) {
+                Desktop.getDesktop().open(file); //open file in user's window
+            } else {
+                System.out.println("File does not exist!");
+            }
         }
         catch(IOException e){
             e.getMessage();

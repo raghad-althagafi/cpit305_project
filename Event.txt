@@ -1,7 +1,7 @@
-Event Name: QQ
-Event Date: 2025-11-04
-Event Faculty: fcit
-Event Location: L
-Event Time: 8
-Event Details: rrrrrrrrr
-Event remaining days is : 349
+Event Name: national
+Event Date: 2025-11-11
+Event Faculty: f
+Event Location: k
+Event Time: 8:00 am
+Event Details: -
+Event remaining days is : 355
