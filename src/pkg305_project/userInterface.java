@@ -361,10 +361,13 @@ public class userInterface {
             }
             filter.append(")");
             query += filter.toString(); // Append the filter to the query
-        }
+        }else if (selectedFaculties == null || selectedFaculties.isEmpty()) {
+        // No faculties selected; set query to something that returns no rows
+        query = "SELECT * FROM event WHERE 1 = 0";
+    }
 
         // Execute the query and display events
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/KAUEvents", "root", "shahad");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/KAUEvents", "root", "raghad");
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(query)) {
 
