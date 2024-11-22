@@ -1,7 +1,7 @@
-Event Name: national2
-Event Date: 2025-11-11
-Event Faculty: f
-Event Location: k
-Event Time: 9
-Event Details: -
-Event remaining days is : 354
+Event Name: rrrraaa
+Event Date: 2025-01-01
+Event Faculty: raghad
+Event Location: raghad
+Event Time: 11
+Event Details: raghad
+Event remaining days is : 40

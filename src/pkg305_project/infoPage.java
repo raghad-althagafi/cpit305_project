@@ -188,10 +188,10 @@ public class infoPage {
 
 //mathod to set font and color for labels
     public JLabel labelStyle(String s){
-       JLabel l = new JLabel(s);
-        l.setForeground(ColorsFonts.darkPurple);
-        l.setFont(ColorsFonts.fontText);
+       JLabel lable = new JLabel(s);
+        lable.setForeground(ColorsFonts.darkPurple);
+        lable.setFont(ColorsFonts.fontText);
        
-        return l;
+        return lable;
     }
 }

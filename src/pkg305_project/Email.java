@@ -22,7 +22,7 @@ public class Email {
     
   
     public static void sendEmail(List<String> users,String eventName,String date,String time,String location) {
-       
+        //the massage
         String body =  "We are excited to inform you that a new event has been added:\n"
                 + "\n"
                 + "Event Name: "+eventName+"\n"
@@ -54,12 +54,12 @@ public class Email {
         try {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
-   
+            //send the massage to all the users
             for (String recipient : users) {
                 message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
             }
-
-            message.setSubject("\"New Event Added: "+eventName+" on "+date+"\"");
+            
+            message.setSubject("\"New Event Added: "+eventName+" on "+date+"\""); //the title of the email
             message.setText(body);
 
             Transport.send(message);

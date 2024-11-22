@@ -183,7 +183,7 @@ public class userInterface {
         if (ispublisher) {
             // Add the Delete button only if the user is the publisher
             JButton delete = createStyledButton("Delete");
-            delete.setPreferredSize(new Dimension(100, 40)); // Set preferred size for delete button
+            delete.setPreferredSize(new Dimension(100, 40)); // Set size for delete button
 
             delete.addActionListener(new ActionListener() {
                 @Override
@@ -313,7 +313,7 @@ public class userInterface {
             checkBoxes[i].addItemListener(new ItemListener() {
                 @Override
                 public void itemStateChanged(ItemEvent e) {
-                    // Refresh the event list whenever the selection changes
+                    //Refresh the event list whenever the selection changes
                     readFromDatabase(db);
                 }
             });
@@ -324,7 +324,7 @@ public class userInterface {
     public List<String> getSelectedFaculties() {
         List<String> selectedFaculties = new ArrayList<>();
 
-        // Check if "All Faculty" is selected
+        //Check if "All Faculty" is selected
         if (checkBoxes[0].isSelected()) {
             selectedFaculties.add("All");
         } else {
@@ -345,11 +345,11 @@ public class userInterface {
     }
 
     public void readFromDatabase(Database db) {
-        eventListPanel.removeAll(); // Clear previous event panels
-        List<String> selectedFaculties = getSelectedFaculties(); // Get selected faculties
+        eventListPanel.removeAll(); //Clear previous event panels
+        List<String> selectedFaculties = getSelectedFaculties();
 
         String query = "SELECT * FROM event";
-        // Check if specific faculties are selected
+        //Check if user select and did not select All
         if (selectedFaculties != null && !selectedFaculties.contains("All")) {
             // Build a WHERE clause to filter events by selected faculties
             StringBuilder filter = new StringBuilder(" WHERE college IN (");
@@ -360,14 +360,14 @@ public class userInterface {
                 }
             }
             filter.append(")");
-            query += filter.toString(); // Append the filter to the query
+            query += filter.toString(); //Append the filter to the query
         }else if (selectedFaculties == null || selectedFaculties.isEmpty()) {
-        // No faculties selected; set query to something that returns no rows
+        //if No faculties selected the query will not return any rows
         query = "SELECT * FROM event WHERE 1 = 0";
     }
 
-        // Execute the query and display events
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/KAUEvents", "root", "KSA_Raghad");
+        //Execute the query and display events
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/KAUEvents", "root", "raghad");
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(query)) {
 
@@ -383,7 +383,7 @@ public class userInterface {
                         rs.getString("details"));
 
                 if (remainingDays(event.getEventDate()) >= 0) {
-                    boolean isPublisher = user.getUsername().equalsIgnoreCase(event.getUser()) && !user.Role();
+                    boolean isPublisher = user.getUsername().equalsIgnoreCase(event.getUser()) && !user.Role();//if the user ia the Publisher and not a student
                     eventListPanel.add(createEventPanel(event, isPublisher));
                     eventListPanel.add(Box.createRigidArea(new Dimension(0, 15)));
                 }

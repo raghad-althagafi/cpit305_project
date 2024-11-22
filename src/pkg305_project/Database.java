@@ -41,7 +41,7 @@ public class Database {
         String createDatabase = "CREATE DATABASE IF NOT EXISTS KAUEvents";
 
         //connect to mySql server
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "KSA_Raghad");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "raghad");
                 Statement st = conn.createStatement()) {
             // Execute statement to create the database
             st.executeUpdate(createDatabase);
@@ -58,7 +58,7 @@ public class Database {
         try {
             //Set the connection to KAU_EVENTS DB
             String connectionURL = "jdbc:mysql://localhost:3306/KAUEvents";
-            con = DriverManager.getConnection(connectionURL, "root", "KSA_Raghad");
+            con = DriverManager.getConnection(connectionURL, "root", "raghad");
             System.out.println("Connected to the database.");
         } catch (SQLException s) {
             System.out.println("SQL statement for connecting to the database is not executed!");
@@ -251,7 +251,7 @@ public class Database {
         }
     }
 
-    //method to find user's email and password
+    //method to find user's Information
     public String[] findUserInformation(String username) {
         String email = null, password = null, userName = null;
         String query = "SELECT email, password, username FROM users WHERE username = ?";
@@ -264,7 +264,7 @@ public class Database {
                     password = result.getString("password");
                     userName = result.getString("username");
                 } else {
-                    // Handle case where no user was found
+                    //where no user was found
                     System.out.println("User not found for username: " + username);
                 }
             }
