@@ -53,7 +53,7 @@ public class ADDevent {
         frame.getContentPane().setBackground(ColorsFonts.lightPurple);
         
       //  frame.setBackground(Color.GRAY);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(null);
          JLabel e = new JLabel("Add Event");
          e.setFont(ColorsFonts.fontTitle);
