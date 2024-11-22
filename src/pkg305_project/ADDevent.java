@@ -137,6 +137,8 @@ public class ADDevent {
         frame.add(detailsLabel);
 
         detailsArea = new JTextArea();
+        detailsArea.setLineWrap(true); // so the sentences will be in lines
+        detailsArea.setWrapStyleWord(true); //to move the whole word to the next line
         detailsArea.setBounds(290, 400, 330, 130);
         frame.add(detailsArea);
 
