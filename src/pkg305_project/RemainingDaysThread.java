@@ -23,20 +23,18 @@ public class RemainingDaysThread extends Thread {
 
     private userInterface ui;
     private Event event;
-    private Details detail;
     private static final ReentrantLock lock = new ReentrantLock();
-    
-    public RemainingDaysThread(userInterface ui, Event event, Details detail) {
+
+    public RemainingDaysThread(userInterface ui, Event event) {
         super("RemainingDaysThread");
         this.ui = ui;
         this.event = event;
-        this.detail = detail;
     }
 
     @Override
     public void run() {
         try {
-            lock.lock();
+            lock.lock(); //lock critical section
             String eventDate = event.getEventDate();
             int remaining = ui.remainingDays(eventDate); //calculate the remaining days for the event
             String time = null;
@@ -47,30 +45,9 @@ public class RemainingDaysThread extends Thread {
             } else {
                 time = "Event has passed";
             }
-            JOptionPane.showMessageDialog(null, 
-                    time  );
-            //to ensure that the panel has been created and prevent errors
-            int attempts = 0;
-            while (detail.getPanel() == null && attempts < 10) {
-                Thread.sleep(50); // to ensure that the remaining days will appear in the details page
-                attempts++;
-            }
+            JOptionPane.showMessageDialog(null, time);//show the remaining days in message dialog
 
-            JPanel panel = detail.getPanel();
-            if (panel == null) {
-                throw new IllegalStateException("Panel is null in Details object!");//if it still null then an exception will be thrown
-            }
-
-            detail.addRemainingDays(time);//adding the remaing days in the details page
-
-            PrintWriter out = new PrintWriter(new FileWriter(".\\Event.txt", true)); //write event remaing days in a file
-            out.println(time);
-            out.close();//close 
-        } catch (IOException e) {
-            e.getMessage();
-        } catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }finally{
+        } finally {
             lock.unlock();
         }
     }

@@ -7,6 +7,7 @@ import java.sql.Date;
  * @author shaha
  */
 public class Event {
+
     private String user;
     private String eventName;
     private String eventDate;

@@ -41,7 +41,7 @@ public class Database {
         String createDatabase = "CREATE DATABASE IF NOT EXISTS KAUEvents";
 
         //connect to mySql server
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "raghad");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3308", "root", "shahad");
                 Statement st = conn.createStatement()) {
             // Execute statement to create the database
             st.executeUpdate(createDatabase);
@@ -57,8 +57,8 @@ public class Database {
     private void connectToDatabase() {
         try {
             //Set the connection to KAU_EVENTS DB
-            String connectionURL = "jdbc:mysql://localhost:3306/KAUEvents";
-            con = DriverManager.getConnection(connectionURL, "root", "raghad");
+            String connectionURL = "jdbc:mysql://localhost:3308/KAUEvents";
+            con = DriverManager.getConnection(connectionURL, "root", "shahad");
             System.out.println("Connected to the database.");
         } catch (SQLException s) {
             System.out.println("SQL statement for connecting to the database is not executed!");
@@ -336,28 +336,16 @@ public class Database {
         }
     }
 
-    public void addSampleEvents() {
-        String query = "INSERT INTO event "
-                + "(eventName, eventDate, eventTime, location, college, publisher, details) VALUES"
-                + "('Games Day', '2024-11-05', '11am', 'FCIT lounge', 'FCIT', 'Sara' ,'visit us'),"
-                + "('G Day', '2024-11-05', '11am', 'FCIT lounge', 'FCIT', 'Shahad', 'visit')";
-        try (PreparedStatement st = con.prepareStatement(query)) {
-            st.executeUpdate(query);
-
-        } catch (SQLException s) {
-            System.out.println("Failed to update events: " + s.getMessage());
-        }
-    }
-
     public int checkRows() {
         String query = "SELECT COUNT(*) FROM event";
         try (PreparedStatement st = con.prepareStatement(query)) {
             ResultSet result = st.executeQuery(query);
-            if(result.next())
+            if (result.next()) {
                 return result.getInt(1);
-        }catch (SQLException s) {
+            }
+        } catch (SQLException s) {
             System.out.println("Failed to count events rows: " + s.getMessage());
         }
-        return 0;  
+        return 0;
     }
 }

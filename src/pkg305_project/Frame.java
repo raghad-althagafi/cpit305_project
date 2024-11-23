@@ -11,7 +11,7 @@ import javax.swing.JFrame;
  *
  * @author msbbr
  */
-public class Frame extends JFrame{
+public class Frame extends JFrame {
 
     public Frame(String title) {
         super(title);
@@ -19,5 +19,5 @@ public class Frame extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
-    
+
 }

@@ -1,21 +1,23 @@
-
 package pkg305_project;
 
 import javax.swing.*;
-        import java.awt.*;
-        import java.awt.event.ActionEvent;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 public class Details {
+
     private Event event;
     private JPanel panel;
+
     // Constructor for the Details class
     Details(Event event) {
         this.event = event;
     }
+
     public void DetailPage() {
         // Create a JFrame for the details window
         JFrame details = new JFrame("Event Details");
@@ -37,7 +39,6 @@ public class Details {
         addEventsTime(panel);
         addEventsLocation(panel);
         addEventsDetails(panel);
-        
 
         // Set layout for the details JFrame and add the panel
         details.setLayout(null);
@@ -56,8 +57,9 @@ public class Details {
 
         return button; // Return the styled button
     }
+
     // Create a 'Back' button
-    private void addBackButton(JFrame details, JPanel panel){
+    private void addBackButton(JFrame details, JPanel panel) {
         JButton back = createStyledButton("Back");
         back.setBounds(20, 25, 160, 50); // Set position and size of the button
         // Add action listener to the 'Back' button
@@ -69,39 +71,35 @@ public class Details {
         });
         panel.add(back);
     }
-    
-    public void setPanel(JPanel panel){
+
+    public void setPanel(JPanel panel) {
         this.panel = panel;
     }
-    public JPanel getPanel(){
+
+    public JPanel getPanel() {
         return panel;
-    }
-    //Create a label for the remaining days
-    public void addRemainingDays(String time){
-        JLabel facultyName = new JLabel(time);
-        detailsLabel(facultyName,getPanel(), 130);
     }
 
     //Create a label for the faculty name
-    private void addEventsFaculty(JPanel panel){
+    private void addEventsFaculty(JPanel panel) {
         JLabel facultyName = new JLabel("Faculty: " + event.getFaculty());
-        detailsLabel(facultyName,panel, 170);
+        detailsLabel(facultyName, panel, 170);
     }
 
     //Create a label for the event time
-    private void addEventsTime(JPanel panel){
+    private void addEventsTime(JPanel panel) {
         JLabel eventTime = new JLabel("Event Time: " + event.getEventDate() + ", " + event.getTime());
-        detailsLabel(eventTime,panel, 210);;
+        detailsLabel(eventTime, panel, 210);;
     }
 
     //Create a label for the event location
-    private void addEventsLocation(JPanel panel){
+    private void addEventsLocation(JPanel panel) {
         JLabel eventLocation = new JLabel("Event Location: " + event.getLocation());
         detailsLabel(eventLocation, panel, 250);
     }
 
     // Add a label for the event location
-    public void detailsLabel(JLabel label, JPanel panel,int y){
+    public void detailsLabel(JLabel label, JPanel panel, int y) {
         label.setVerticalAlignment(JLabel.CENTER);
         label.setHorizontalAlignment(JLabel.LEFT);
         label.setFont(ColorsFonts.fontText);
@@ -111,7 +109,7 @@ public class Details {
     }
 
     // Create a label for the event name
-    private void addEventsName(JPanel panel){
+    private void addEventsName(JPanel panel) {
         JLabel eventsName = new JLabel("Event Name: " + event.getEventName());
         eventsName.setVerticalAlignment(JLabel.TOP); // Align label to the top
         eventsName.setHorizontalAlignment(JLabel.LEFT); // Center align text
@@ -122,7 +120,7 @@ public class Details {
     }
 
     // Create a JTextPane for additional text
-    public void addEventsDetails(JPanel panel){
+    public void addEventsDetails(JPanel panel) {
         JLabel eventLabel = new JLabel("Event Details: ");
         detailsLabel(eventLabel, panel, 290);
         JTextPane textArea = new JTextPane();

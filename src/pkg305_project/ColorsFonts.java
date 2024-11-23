@@ -13,13 +13,13 @@ import java.awt.Font;
  * @author msbbr
  */
 public class ColorsFonts {
-    
-    public static final Font smallText = new Font("Serif",Font.PLAIN, 25);
-    public static final Font fontText = new Font("Serif",Font.BOLD, 25);
-    public static final Font fontTitle = new Font("Serif",Font.BOLD, 40);
-    public static final Font fontButton = new Font("Serif",Font.BOLD, 30);
-    public static final Color lightPurple = new Color(226,219,250);
-    public static final Color darkPurple = new Color(104,75,250);
+
+    public static final Font smallText = new Font("Serif", Font.PLAIN, 25);
+    public static final Font fontText = new Font("Serif", Font.BOLD, 25);
+    public static final Font fontTitle = new Font("Serif", Font.BOLD, 40);
+    public static final Font fontButton = new Font("Serif", Font.BOLD, 30);
+    public static final Color lightPurple = new Color(226, 219, 250);
+    public static final Color darkPurple = new Color(104, 75, 250);
     public static final Color midPurpule = new Color(187, 169, 250);
-    
+
 }

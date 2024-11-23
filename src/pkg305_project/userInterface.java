@@ -167,7 +167,7 @@ public class userInterface {
                 Details details = new Details(event); // Create Details page when pressing the button
 
                 PrintThread thread1 = new PrintThread(event); //thread to print event info in file
-                RemainingDaysThread thread2 = new RemainingDaysThread(userInterface.this, event, details);
+                RemainingDaysThread thread2 = new RemainingDaysThread(userInterface.this, event);
 
                 thread1.start();
                 thread2.start();
@@ -202,7 +202,7 @@ public class userInterface {
 
                     if (choice == 0) { // If "Delete" is selected
                         if (db.deleteEvent(event.getEventName())) { // Use `event.getEventName()` instead of `getEventID()`
-                          //  JOptionPane.showMessageDialog(null, "Event deleted successfully.");
+                            //  JOptionPane.showMessageDialog(null, "Event deleted successfully.");
                             eventListPanel.remove(panel); // Remove the event panel from the UI
                             eventListPanel.revalidate();
                             eventListPanel.repaint();
@@ -361,13 +361,13 @@ public class userInterface {
             }
             filter.append(")");
             query += filter.toString(); //Append the filter to the query
-        }else if (selectedFaculties == null || selectedFaculties.isEmpty()) {
-        //if No faculties selected the query will not return any rows
-        query = "SELECT * FROM event WHERE 1 = 0";
-    }
+        } else if (selectedFaculties == null || selectedFaculties.isEmpty()) {
+            //if No faculties selected the query will not return any rows
+            query = "SELECT * FROM event WHERE 1 = 0";
+        }
 
         //Execute the query and display events
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/KAUEvents", "root", "raghad");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/KAUEvents", "root", "shahad");
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(query)) {
 

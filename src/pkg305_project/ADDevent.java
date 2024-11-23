@@ -23,9 +23,9 @@ import javax.swing.JTextField;
  *
  * @author Ragha
  */
-
 public class ADDevent {
-       public JButton returnButton;
+
+    public JButton returnButton;
     public JButton addButton;
 
     public JTextField eventNameField;
@@ -35,32 +35,33 @@ public class ADDevent {
     public JTextField collegeField;
     public JTextField publisherField;
     public JTextArea detailsArea;
-    public static final Color Dgreen=new Color(5,125,114);
+    public static final Color Dgreen = new Color(5, 125, 114);
     public Database dbManager;
     private User user;
     public JComboBox<String> collegeComboBox;
+
     public ADDevent(User user) {
         this.user = user;
         // Initialize DatabaseManager
         dbManager = new Database();
         dbManager.createTablesevent(); // Setup tables if they don't exist
     }
-    
+
 // Method to create the frame and add components
     public JFrame createFrame(String title) {
         JFrame frame = new JFrame(title);
         frame.setSize(1000, 900);
         frame.getContentPane().setBackground(ColorsFonts.lightPurple);
-        
-      //  frame.setBackground(Color.GRAY);
+
+        //  frame.setBackground(Color.GRAY);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(null);
-         JLabel e = new JLabel("Add Event");
-         e.setFont(ColorsFonts.fontTitle);
+        JLabel e = new JLabel("Add Event");
+        e.setFont(ColorsFonts.fontTitle);
         e.setForeground(ColorsFonts.darkPurple);
-        e.setBounds(340, 50, 200, 40); 
+        e.setBounds(340, 50, 200, 40);
         frame.add(e);
-         
+
         returnButton = new JButton("Back");
         //(800, 15, 10, 30) (20, 750, 160, 50)
         returnButton.setBounds(20, 25, 160, 50);
@@ -75,7 +76,7 @@ public class ADDevent {
         eventNameLabel.setFont(ColorsFonts.fontText);
         eventNameLabel.setForeground(ColorsFonts.darkPurple);
         eventNameLabel.setBounds(140, 150, 150, 30);
-       
+
         frame.add(eventNameLabel);
 
         eventNameField = new JTextField();
@@ -95,8 +96,8 @@ public class ADDevent {
 
         // Create and add label and text field for Time
         JLabel timeLabel = new JLabel("Time:");
-       timeLabel.setFont(ColorsFonts.fontText);
-       timeLabel.setForeground(ColorsFonts.darkPurple);
+        timeLabel.setFont(ColorsFonts.fontText);
+        timeLabel.setForeground(ColorsFonts.darkPurple);
         timeLabel.setBounds(490, 190, 150, 40);
         frame.add(timeLabel);
 
@@ -112,7 +113,7 @@ public class ADDevent {
         frame.add(locationLabel);
 
         locationField = new JTextField();
-        locationField.setBounds(290, 250,  330, 40);
+        locationField.setBounds(290, 250, 330, 40);
         frame.add(locationField);
 
         // Create and add label and text field for College
@@ -128,11 +129,10 @@ public class ADDevent {
         collegeComboBox.setBounds(290, 300, 330, 40);
         frame.add(collegeComboBox);
 
-     
         // Create and add label and text area for Details
         JLabel detailsLabel = new JLabel("Details:");
         detailsLabel.setFont(ColorsFonts.fontText);
-       detailsLabel.setForeground(ColorsFonts.darkPurple);
+        detailsLabel.setForeground(ColorsFonts.darkPurple);
         detailsLabel.setBounds(140, 390, 150, 30);
         frame.add(detailsLabel);
 
@@ -149,34 +149,35 @@ public class ADDevent {
         addButton.setForeground(Color.WHITE);
         addButton.setBackground(ColorsFonts.darkPurple);
         frame.add(addButton);
-        
+
         // Add event to database when button is clicked
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 addEventToDatabase();
-                Email.sendEmail(dbManager.getAllEmails(),eventNameField.getText(),dateField.getText(),timeField.getText(),locationField.getText());
+                Email.sendEmail(dbManager.getAllEmails(), eventNameField.getText(), dateField.getText(), timeField.getText(), locationField.getText());
             }
         });
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-              JOptionPane.showMessageDialog(frame, 
-                    "The event has been added\n"  );
-              frame.dispose();
+                JOptionPane.showMessageDialog(frame,
+                        "The event has been added\n");
+                frame.dispose();
             }
-            
+
         });
         returnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-              
+
                 frame.dispose();
-              
+
             }
         });
         return frame; // Return the complete frame with components
     }
+
     public void addEventToDatabase() {
         String eventName = eventNameField.getText();
         String date = dateField.getText();
@@ -184,14 +185,11 @@ public class ADDevent {
         String location = locationField.getText();
         String college = (String) collegeComboBox.getSelectedItem();
         String details = detailsArea.getText();
-        String publisher=user.getUsername();
+        String publisher = user.getUsername();
 
         // Use DatabaseManager to add the event to the database
-        dbManager.addEvent(eventName, date,time ,location,college,publisher, details);
-      
+        dbManager.addEvent(eventName, date, time, location, college, publisher, details);
+
     }
-    
-   
-    
-    
+
 }
